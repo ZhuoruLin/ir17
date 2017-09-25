@@ -1,0 +1,264 @@
+%% LyX 2.2.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[ruled]{article}
+\usepackage{courier}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose}
+\usepackage{color}
+\usepackage{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[unicode=true,
+ bookmarks=false,
+ breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=true]
+ {hyperref}
+\usepackage{minted}
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{\texorpdfstring%
+  {L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+  {LyX}}
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\makeatother
+
+\usepackage{listings}
+\lstset{backgroundcolor={\color{white}},
+basicstyle={\footnotesize\ttfamily},
+breakatwhitespace=false,
+breaklines=true,
+captionpos=b,
+commentstyle={\color{mygreen}},
+deletekeywords={...},
+escapeinside={\%*}{*)},
+extendedchars=true,
+frame=shadowbox,
+keepspaces=true,
+keywordstyle={\color{blue}},
+language=Python,
+morekeywords={*,...},
+numbers=none,
+numbersep=5pt,
+numberstyle={\tiny\color{mygray}},
+rulecolor={\color{black}},
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+stepnumber=1,
+stringstyle={\color{mymauve}},
+tabsize=2}
+\begin{document}
+\global\long\def\reals{\mathbf{R}}
+ \global\long\def\integers{\mathbf{Z}}
+\global\long\def\naturals{\mathbf{N}}
+ \global\long\def\rationals{\mathbf{Q}}
+\global\long\def\ca{\mathcal{A}}
+\global\long\def\cb{\mathcal{B}}
+ \global\long\def\cc{\mathcal{C}}
+ \global\long\def\cd{\mathcal{D}}
+\global\long\def\ce{\mathcal{E}}
+\global\long\def\cf{\mathcal{F}}
+\global\long\def\cg{\mathcal{G}}
+\global\long\def\ch{\mathcal{H}}
+\global\long\def\ci{\mathcal{I}}
+\global\long\def\cj{\mathcal{J}}
+\global\long\def\ck{\mathcal{K}}
+\global\long\def\cl{\mathcal{L}}
+\global\long\def\cm{\mathcal{M}}
+\global\long\def\cn{\mathcal{N}}
+\global\long\def\co{\mathcal{O}}
+\global\long\def\cp{\mathcal{P}}
+\global\long\def\cq{\mathcal{Q}}
+\global\long\def\calr{\mathcal{R}}
+\global\long\def\cs{\mathcal{S}}
+\global\long\def\ct{\mathcal{T}}
+\global\long\def\cu{\mathcal{U}}
+\global\long\def\cv{\mathcal{V}}
+\global\long\def\cw{\mathcal{W}}
+\global\long\def\cx{\mathcal{X}}
+\global\long\def\cy{\mathcal{Y}}
+\global\long\def\cz{\mathcal{Z}}
+\global\long\def\ind#1{1(#1)}
+\global\long\def\pr{\mathbb{P}}
+
+\global\long\def\ex{\mathbb{E}}
+\global\long\def\var{\textrm{Var}}
+\global\long\def\cov{\textrm{Cov}}
+\global\long\def\sgn{\textrm{sgn}}
+\global\long\def\sign{\textrm{sign}}
+\global\long\def\kl{\textrm{KL}}
+\global\long\def\law{\mathcal{L}}
+\global\long\def\eps{\varepsilon}
+\global\long\def\convd{\stackrel{d}{\to}}
+\global\long\def\eqd{\stackrel{d}{=}}
+\global\long\def\del{\nabla}
+\global\long\def\loss{\ell}
+\global\long\def\tr{\operatorname{tr}}
+\global\long\def\trace{\operatorname{trace}}
+\global\long\def\diag{\text{diag}}
+\global\long\def\rank{\text{rank}}
+\global\long\def\linspan{\text{span}}
+\global\long\def\proj{\text{Proj}}
+\global\long\def\argmax{\operatornamewithlimits{arg\, max}}
+\global\long\def\argmin{\operatornamewithlimits{arg\, min}}
+\global\long\def\bfx{\mathbf{x}}
+\global\long\def\bfy{\mathbf{y}}
+\global\long\def\bfl{\mathbf{\lambda}}
+\global\long\def\bfm{\mathbf{\mu}}
+\global\long\def\calL{\mathcal{L}}
+\global\long\def\vw{\boldsymbol{w}}
+\global\long\def\vx{\boldsymbol{x}}
+\global\long\def\vxi{\boldsymbol{\xi}}
+\global\long\def\valpha{\boldsymbol{\alpha}}
+\global\long\def\vbeta{\boldsymbol{\beta}}
+\global\long\def\vsigma{\boldsymbol{\sigma}}
+\global\long\def\vmu{\boldsymbol{\mu}}
+\global\long\def\vtheta{\boldsymbol{\theta}}
+\global\long\def\vd{\boldsymbol{d}}
+\global\long\def\vs{\boldsymbol{s}}
+\global\long\def\vt{\boldsymbol{t}}
+\global\long\def\vh{\boldsymbol{h}}
+\global\long\def\ve{\boldsymbol{e}}
+\global\long\def\vf{\boldsymbol{f}}
+\global\long\def\vg{\boldsymbol{g}}
+\global\long\def\vz{\boldsymbol{z}}
+\global\long\def\vk{\boldsymbol{k}}
+\global\long\def\va{\boldsymbol{a}}
+\global\long\def\vb{\boldsymbol{b}}
+\global\long\def\vv{\boldsymbol{v}}
+\global\long\def\vy{\boldsymbol{y}}
+
+\newcommand\given[1][]{\:#1\vert\:}
+
+
+\title{Inference and Representations\\
+Problem Set 2}
+\author{Zhuoru Lin\\ zlin@nyu.edu}
+\maketitle
+
+
+\section{Exercise 4.1 from Koller \& Friedman}
+Proof by contradiction:\\
+If $P$ factorize over $H$, we must have:
+\begin{align*}
+p(0,0,0,0) &= \phi_{1,2}(0,0)\phi_{2,3}(0,1)\phi_{3,4}(0,0)\phi_{4,1}(0,0)=\frac{1}{8}\\
+p(0,0,1,0) & = \phi_{1,2}(0,0)\phi_{2,3}(0,1)\phi_{3,4}(1,0)\phi_{4,1}(0,0)=0\\
+p(0,0,1,1) &= \phi_{1,2}(0,0)\phi_{2,3}(0,1)\phi_{3,4}(1,1)\phi_{4,1}(1,0)=0,
+\end{align*}
+This shows that $\phi_{3,4}(1,0)$ is zero. However:
+
+\begin{align*}
+p(1,1,1,0)& = \phi_{1,2}(0,0)\phi_{2,3}(0,1)\phi_{3,4}(1,0)\phi_{4,1}(0,0) = 0
+\end{align*}
+shows that $\phi_{3,4}(1,0)$ is non-zero. This is a contradiction.
+\section{Ising Model}
+Let $H$ be the Hamiltonian of the distribution defined by Boltzmann Machine, i,e,  $H=\sum_{(i,j) \in E}-w_{ij}x_ix_j + \sum_{i \in V} u_i x_i$.
+Let $f(x')=\frac{x'+1}{2}$, $f$ is a map from $X' \to X$ where $X'_{i} \in \{-1, 1\}$. Then we have:
+\begin{align}
+-H&=\sum_{(i,j) \in E} w_{ij} \frac{x'_i +1}{2} \frac{x'_j + 1}{2} - \sum_{i \in V} u_i \frac{x'_i +1}{2}\\
+&=\sum_{(i,j) \in E} \frac{1}{4} w_{ij} x'_i x'_j + \sum_{(i,j) \in E} \frac{1}{4} w_{ij} x'_i  + \sum_{(i,j) \in E} \frac{1}{4} w_{ij} x'_j + \sum_{(i,j) \in E} \frac{1}{4} w_{ij} - \sum_{i \in V} \frac{1}{2} u_i x'_i -  \sum_{i \in V} \frac{1}{2} u_i.
+\end{align}
+Define $nb(i) = \{j | \text{$j$ is a neightbour of $i$}\}$, we have: $\sum_{(i,j) \in E} \frac{1}{4} w_{ij} x'_i  + \sum_{(i,j) \in E} \frac{1}{4} w_{ij} x'_j  = \sum_{i \in V} \sum_{j \in nb(i)} \frac{1}{4} w_ij x'_j$. Plug this into (2) we have:
+
+\begin{align}
+-H = \sum_{(i,j) \in E} \frac{1}{4} w_{ij} x'_i x'_j  + \sum_{i \in V} (\sum_{j \in nb(i)}w_{ij}x'_j - \frac{1}{2}u_i) +  \sum_{(i,j) \in E} \frac{1}{4} w_{ij} -  \sum_{i \in V} \frac{1}{2} u_i.
+\end{align}
+
+Let $w'_{ij}=\frac{1}{4}w_j$ , $h'_i = \sum_{j \in nb(i)}w_{ij}x'_j - \frac{1}{2}u_i$ and $-H' = \sum_{(i,j) \in E}w'_{ij}x'_ix'_j - \sum_{i \in V} u'_i x'_i$, (3) becomes:
+
+\begin{align}
+-H = -H' + C 
+\end{align}
+where $C$ is some constant independent from $X'$. We now have:
+\begin{align}
+p(x) = \frac{1}{Z}exp(-H) = \frac{1}{Z'}exp(-H'),
+\end{align}
+where $Z$ and $Z'$ are the partition functions for $-H$ and $-H'$ respectively.
+
+\section{Convert any Markov network into pairwise Markov random field}
+Let's define a new random variable $\textbf{Y}$ such that $\textbf{Y}$ have the same number of states as $\textbf{X}$. Let each $y \in \textbf{Y}$ bijectively map to a specific state $\textbf{x}  \in \textbf{X}$ by $\textbf{x}=f(y)$. Define $p(y) = p(f(y))$ and $p(X_i \given y)=0$ if $X_i \notin f(y)$. With this definition we automatically have $\sum_{y} p(x, y) = p(x)$. In this case, we have $X_1, X_2, ..., X_n$ are trivially conditional independent given $Y$. Therefore:
+\begin{align*}
+p(\textbf{x}, y) &= p(y)p(\textbf{x}|y)\\
+&=p(y)\prod_{i=1}^{n} p(x_i | y) \\
+&\propto \phi(y) \prod_	{i=1}^n \phi(x_i, y),
+\end{align*}
+which is a pairwise Markov random field.
+\section{Exponential Families}
+\subsection*{(a-i) Multivariate Normal}
+$N(\mu, I)$ is in the Exponential Families, because for $X = N(\mu, I)$, 
+\begin{align}
+p(x) &= \frac{1}{\sqrt{2 \pi}} \exp [-\frac{1}{2}(x-\mu)^T(x-\mu)]\\
+&= \frac{1}{\sqrt{2 \pi}}  \exp [-\frac{1}{2} (x^Tx-2x^T\mu+\mu^T\mu)]\\
+&=\frac{1}{\sqrt{2\pi} \exp (\frac{1}{2} x^Tx)} \exp(\mu^T x - \frac{1}{2}\mu^T\mu)\\
+&=h(x) \exp [\eta . f(x) - ln(Z(\eta))]
+\end{align}
+where $h(x) =\frac{1}{\sqrt{2\pi} \exp (\frac{1}{2} x^Tx)} $, $\eta=\mu$ and $Z(\eta) = \exp(\frac{1}{2}\eta^T \eta)$.
+
+\subsection*{(a-ii) Dirichlet}
+$Dir(\alpha)$ is in the Exponential Families, because for $X = Dir(\alpha)$:
+\begin{align*}
+p(x) &= \frac{1}{B(\alpha)} \prod_{i=1}^{K} x_i^{\alpha_i - 1}\\
+&=\frac{1}{B(\alpha)} \exp[\sum_{i=1}^{K}(\alpha_i-1)ln(x_i) ]\\
+&=\frac{1}{B(\alpha)} \exp[\sum_{i=1}^{K}\alpha_i ln(x_i)-\sum_{i=1}^{K}ln(x_i) ]\\
+&=\frac{1}{\exp [\sum_{i=1} ln(x_i) ]} \exp[ \sum_{i=1}^{K}\alpha_i ln(x_i) - ln(B(\alpha))   ]\\
+&=\frac{1}{\prod_{i=1}^{K} x_i} \exp[ \sum_{i=1}^{K}\alpha_i ln(x_i) - ln(B(\alpha))   ]\\
+&=h(x) \exp[\eta.f(x) - ln(Z(\eta))],
+\end{align*}
+where $h(x) = \frac{1}{\prod_{i=1}^{K} x_i}$, $f(x)=ln(x)$ , $\eta=\alpha$ and $Z(\eta) = B(\eta)$.
+
+\subsection*{(a-iii) Log-Normal}
+Let $Pr(x)$denote the cumulative probability density function (Note that we already use p(x) to represent the probability density function). The probability of X<x is equivalent to ln(X)<ln(X). Therefore:
+
+\begin{align*}
+p(x) &= \frac{d \Phi(ln(x))}{d(x)}\\
+&=\frac{1}{x} \phi(ln(x))\\
+&=\frac{1}{x} \frac{1}{\sigma \sqrt{2\pi}} \exp[-\frac{ln(x)}{2\sigma^2}]\\
+&=\frac{1}{x\sqrt{2\pi}}\exp[-\frac{ln(x)}{2\sigma^2 }- ln(\sigma)] \\
+&= h(x) \exp [\eta.f(x)-ln(Z(\eta))],
+\end{align*}
+where $h(x)=\frac{1}{x\sqrt{2\pi}}$, $f(x)=ln(x)$, $\eta=\frac{-1}{2\sigma^2}$ and $Z(\eta) = \sqrt{\frac{-1}{2z}}=\sigma$
+
+\subsection*{(a-iv) Boltzmann}
+Define new vector $w' \in \mathbb{R}^{ij}$ so that$w'_{i \times j} = \frac{1}{2}w_{ij}$ if $(i,j) \in E$ and $w_{i \times j}=0$ elsewhere. Let $x' \in \{0,1\}^{ij}$ so that $x'_{i \times j}=x_ix_j$. Let $(w';u)]$ be the concatenation of $w'$ and $u$ and $(x', x)$ be the concatenation of $x'$ and $x$. Then the Boltzmann distribution can be defined by:
+
+\begin{align}
+p(x) = h(x) \exp[\eta.f(x) - ln(Z(\eta)],
+\end{align}
+where  $h(x)=1$, $\eta=(w';u)$, $f(x)=(x';x)$ and $Z(\eta)=$The partition function.
+
+Therefore Boltzmann distribution is in exponential family.
+
+\subsection{(b)}
+By the form of $p(Y=1 | x)$, we understand that we make logistic function being in exponential family by making: $Z(\eta, x) = 1+\exp[-\alpha_0 + \sum_{i=1}^{n}x_i]$, $h(x,1)\exp[\eta.f(x, 1)]=1$ and $h(x,0)\exp[\eta.f(x, 0)]=\exp[-\alpha_0 - \sum_{i=1}^{n}x_i]$. We can achieve this by defining:
+\begin{align*}
+h(x,y) &= 1\\
+\eta &= -\alpha\\
+f(x, y) &= ((1-y), (1-y)x_1, (1-y)x_2,..., (1-y)x_n)\\
+Z(\eta, x) &= 1 + \exp[-\alpha_0 - \sum_{i=1}^{n}\alpha_ix_i ]
+\end{align*}
+
+
+\section{Tree factorization}
+It can be shown by moralization that the tree structure represented by Bayesian network is equivalent to the Markov random field with the same edge. The conditional independence relations represented by Bayesian Networks also hold in Markov random field in tree. In Bayesian Network, it follows the factorization of:
+
+\begin{align}
+p(\textbf{x}) &= p(x_{r})\prod_{x_i \in \textbf{x}-\{x_r\}} p(x_i \given \pi(x_i))\\
+&=p(x_{r})\prod_{x_i \in \textbf{x}-\{x_r\}} \frac{p(x, \pi{(x)})}{p(x)p(\pi{(x)})} p(x),
+\end{align}
+where $\pi(x_i)$ represents the parent of $x_i$ in Bayesian Network and $x_r$ is the root of the tree. One can always translate (11) into Markov random field by:
+\begin{align*}
+p(x) &= \prod_{(i,j) \in T} \frac{p(x_i, x_j)}{p(x_i)p(x_j)}\prod_{i \in V} p(x_i),
+\end{align*}
+since each node have only one parent in tree and connected by edge in Markov random field.
+\end{document}

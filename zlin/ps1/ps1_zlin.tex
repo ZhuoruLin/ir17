@@ -1,0 +1,253 @@
+%% LyX 2.2.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[ruled]{article}
+\usepackage{courier}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose}
+\usepackage{color}
+\usepackage{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[unicode=true,
+ bookmarks=false,
+ breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=true]
+ {hyperref}
+\usepackage{minted}
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{\texorpdfstring%
+  {L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+  {LyX}}
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\makeatother
+
+\usepackage{listings}
+\lstset{backgroundcolor={\color{white}},
+basicstyle={\footnotesize\ttfamily},
+breakatwhitespace=false,
+breaklines=true,
+captionpos=b,
+commentstyle={\color{mygreen}},
+deletekeywords={...},
+escapeinside={\%*}{*)},
+extendedchars=true,
+frame=shadowbox,
+keepspaces=true,
+keywordstyle={\color{blue}},
+language=Python,
+morekeywords={*,...},
+numbers=none,
+numbersep=5pt,
+numberstyle={\tiny\color{mygray}},
+rulecolor={\color{black}},
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+stepnumber=1,
+stringstyle={\color{mymauve}},
+tabsize=2}
+\begin{document}
+\global\long\def\reals{\mathbf{R}}
+ \global\long\def\integers{\mathbf{Z}}
+\global\long\def\naturals{\mathbf{N}}
+ \global\long\def\rationals{\mathbf{Q}}
+\global\long\def\ca{\mathcal{A}}
+\global\long\def\cb{\mathcal{B}}
+ \global\long\def\cc{\mathcal{C}}
+ \global\long\def\cd{\mathcal{D}}
+\global\long\def\ce{\mathcal{E}}
+\global\long\def\cf{\mathcal{F}}
+\global\long\def\cg{\mathcal{G}}
+\global\long\def\ch{\mathcal{H}}
+\global\long\def\ci{\mathcal{I}}
+\global\long\def\cj{\mathcal{J}}
+\global\long\def\ck{\mathcal{K}}
+\global\long\def\cl{\mathcal{L}}
+\global\long\def\cm{\mathcal{M}}
+\global\long\def\cn{\mathcal{N}}
+\global\long\def\co{\mathcal{O}}
+\global\long\def\cp{\mathcal{P}}
+\global\long\def\cq{\mathcal{Q}}
+\global\long\def\calr{\mathcal{R}}
+\global\long\def\cs{\mathcal{S}}
+\global\long\def\ct{\mathcal{T}}
+\global\long\def\cu{\mathcal{U}}
+\global\long\def\cv{\mathcal{V}}
+\global\long\def\cw{\mathcal{W}}
+\global\long\def\cx{\mathcal{X}}
+\global\long\def\cy{\mathcal{Y}}
+\global\long\def\cz{\mathcal{Z}}
+\global\long\def\ind#1{1(#1)}
+\global\long\def\pr{\mathbb{P}}
+
+\global\long\def\ex{\mathbb{E}}
+\global\long\def\var{\textrm{Var}}
+\global\long\def\cov{\textrm{Cov}}
+\global\long\def\sgn{\textrm{sgn}}
+\global\long\def\sign{\textrm{sign}}
+\global\long\def\kl{\textrm{KL}}
+\global\long\def\law{\mathcal{L}}
+\global\long\def\eps{\varepsilon}
+\global\long\def\convd{\stackrel{d}{\to}}
+\global\long\def\eqd{\stackrel{d}{=}}
+\global\long\def\del{\nabla}
+\global\long\def\loss{\ell}
+\global\long\def\tr{\operatorname{tr}}
+\global\long\def\trace{\operatorname{trace}}
+\global\long\def\diag{\text{diag}}
+\global\long\def\rank{\text{rank}}
+\global\long\def\linspan{\text{span}}
+\global\long\def\proj{\text{Proj}}
+\global\long\def\argmax{\operatornamewithlimits{arg\, max}}
+\global\long\def\argmin{\operatornamewithlimits{arg\, min}}
+\global\long\def\bfx{\mathbf{x}}
+\global\long\def\bfy{\mathbf{y}}
+\global\long\def\bfl{\mathbf{\lambda}}
+\global\long\def\bfm{\mathbf{\mu}}
+\global\long\def\calL{\mathcal{L}}
+\global\long\def\vw{\boldsymbol{w}}
+\global\long\def\vx{\boldsymbol{x}}
+\global\long\def\vxi{\boldsymbol{\xi}}
+\global\long\def\valpha{\boldsymbol{\alpha}}
+\global\long\def\vbeta{\boldsymbol{\beta}}
+\global\long\def\vsigma{\boldsymbol{\sigma}}
+\global\long\def\vmu{\boldsymbol{\mu}}
+\global\long\def\vtheta{\boldsymbol{\theta}}
+\global\long\def\vd{\boldsymbol{d}}
+\global\long\def\vs{\boldsymbol{s}}
+\global\long\def\vt{\boldsymbol{t}}
+\global\long\def\vh{\boldsymbol{h}}
+\global\long\def\ve{\boldsymbol{e}}
+\global\long\def\vf{\boldsymbol{f}}
+\global\long\def\vg{\boldsymbol{g}}
+\global\long\def\vz{\boldsymbol{z}}
+\global\long\def\vk{\boldsymbol{k}}
+\global\long\def\va{\boldsymbol{a}}
+\global\long\def\vb{\boldsymbol{b}}
+\global\long\def\vv{\boldsymbol{v}}
+\global\long\def\vy{\boldsymbol{y}}
+
+\newcommand\given[1][]{\:#1\vert\:}
+
+
+\title{Inference and Representations\\
+Problem Set 1}
+\author{Zhuoru Lin\\ zlin@nyu.edu}
+\maketitle
+
+
+\section{Hidden Markov Model}
+\subsection*{a}
+Since we know $X_1=Happy$, $p(X1=Happy)=1$. Therefore:
+\begin{align*}
+p(X_2=Happy)&=p(X_2=Happy, X_1=Happy)+p(X_2=Happy, X_1=Angry)\\
+&=p(X_2=Happy \given X_1=Happy)p(X_1=Happy)+\\&p(X_2=Happy \given X_1=Angry)p(X_1=Angry)\\
+&=p(X_2=Happy \given X_1=happy)\\
+&=0.9
+\end{align*}
+
+\subsection*{b}
+\begin{align*}
+p(Y_2=frawn)&=p(Y_2=frawn \given X_2 =Happy)p(X_2=Happy)+p(Y_2=frawn \given X_2 =Angry)p(X_2=Angry)\\
+&=0.1 \times 0.9 + 0.6 \times 0.1\\
+&=0.15
+\end{align*}
+
+\subsection*{c}
+\begin{align*}
+p(X_2=Happy \given Y_2=frawn)&=\frac{p(X_2=Happy, Y_2=frawn)}{p(Y_2=frawn)}\\
+&=\frac{p(Y_2=frawn\given X_2=Happy)p(X_2=Happy)}{p(Y_2=frawn)}\\
+&=\frac{0.1*0.9}{0.15}\\
+&=0.6
+\end{align*}
+
+\subsection*{d}
+We know that $p(X_1=Happy) = 1$. It can be shown by induction that: 
+\begin{equation}
+p(X_t=Happy) = a^{t-1}p(X_1=Happy)+b(a^{t-2}+a^{t-1}+...+a+1).
+\end{equation}
+where $a=p(X_t=Happy|X_{t-2}=Happy)-p(X_t=Happy|X_{t-2}=Angry)=0.8 $ and $b=p(X_t=Happy|X_{t-2}=Angry)=0.1$ is true for $t=2,..n$. The proving steps of induction is shown at the end of this question. Approximate $a^{79} \approx 0$. Equation (1) becomes:
+\begin{align*}
+p(X_t=Happy) &= b(a^{t-2}+a^{t-1}+...+a+1)\\
+&=b\frac{a^{79}-1}{a-1}\\
+&\approx \frac{b}{1-a}\\
+&=0.5
+\end{align*}
+Then we get:
+\begin{align*}
+p(Y_80=yell) &= p(Y_{80}=yell \given X_{80}=Happy)+p(Y_{80}=yell \given X_{80}=Angry)\\
+&=0.1\times0.5+0.2\times0.5\\
+&=0.15
+\end{align*}
+
+\subsection*{Proof of induction step}
+Base case: when $t=2$, $p(X_2=Happy) =0.8*p(X_1=Happy)+0.1=0.9$\\
+Induction Step:\\
+Suppose (1) is true for $t=2,3,4,...,n$:
+\begin{align*}
+&p(X_{n+1}=Happy)=\\ &p(X_{t+1}=Happy|X_t=Happy)p(X_t=Happy)+p(X_{t+1}=Happy|X_t=Angry)(1-p(X_t=Happy))\\
+&=(p(X_{t+1}=Happy|X_t=Happy)-p(X_{t+1}=Happy|X_t=Angry))p(X_t=Happy)\\
+&+p(X_{t+1}=Happy|X_t=Angry)\\
+&=ap(X_t=Happy)+b\\
+&=a(a^{t-1}p(X_1=Happy)+b(a^{t-2}+a^{t-1}+...+a+1))+b\\
+&=a^{t}p(X_1=Happy)+b(a^t+a^{t-1}...+a+1)\\
+\end{align*} 
+ 
+\subsection*{(e)}
+Let $x_t$, $y_t$ be the realization of $X_t$ and $Y_t$. $x_1=Happy$ and $y_1= y_2=...=y_5=frown$ Since:
+\begin{align}
+p(x_1, x_2, ..., x_5 | y_1, y_2, ..., y_5) &= \frac{p(x_1,x_2,..,x_5, y_1, y_2, ..., y_5)}{p(y_1, y_2, ..., y_5)}\\
+&=\frac{\prod_{v \in \text{nodes}}p(v \given \pi(v))}{p(y_1, y_2, ..., y_5)}
+\end{align}
+$p(y_1, y_2, ..., y_5)$ is a constant. Hence: $\text{argmax } p(x_1, x_2, ..., x_5 | y_1, y_2, ..., y_5) =\text{argmax } p(x_1,x_2,..,x_5, y_1, y_2, ..., y_5)$. For HMM :
+\begin{align}
+\prod_{v \in \text{nodes}}p(v \given \pi(v)) &= p(x_1)p(y_1 | x_1)  \prod_{t=2}^{5} p(x_t | x_t-1)p(y_t | x_t)\\ 
+&=p(x_1, x_2, x_3, y_1, y_2, y_3) \prod_{t=4}^{5} p(x_t | x_t-1)p(y_t | x_t).
+\end{align}
+It can be calculated (Calculation omitted for conciseness) that $\text{argmax } p(x_1, x_2, x_3, y_1, y_2, y_3)$ is $x_1=Happy$, $x_2=Angry$ and $x_3=Angry$.  \\\\We also have $p(x_t=Angry | x_{t-1}=Angry)p(y_t=frown | x_t=Angry) = 0.9\times0.6=0.54$. This is larger than Any of $p(x_t=Happy | x_{t-1}=Angry)p(y_t=frown | x_t=Happy) =0.1\times 0.1=0.01$, $p(x_t=Happy | x_{t-1}=Happy)p(y_t=frown | x_t=Happy) =0.9 \times 0.1=0.09$ or $p(x_t=Angry | x_{t-1}=Happy)p(y_t=frown | x_t=Angry)=0.1\times0.6=0.06 $. Start with $X_3=Angry$, if $x_1, x_2, x_3$ are MAE, $x_4=Angry$ must be MAE too. \\\\
+Hence we can keep obtain maximum likelihood by letting $x_t=Angry$ for $t>3$. \\\\
+Therefore the MAE estimations are:\\
+$x_1=Happy, x_2=x_3=x_4=x_5=Angry$.
+
+\section{Bayesian Networks must be acyclic}
+To show that $f$ \textbf{MAY} no longer define proper probability distribution. We show a counter example as below:\\\\
+Consider three binary random variable $X_1, X_2$ and $X_3$ which form a directed circle. We can imagine a probability distributions that is only possible when $X_1=X_2=X_3$.  In this case $p_{X_i \given X_j}(a,b)=1$ when $a=b$ and $p_{X_i \given X_j}(a,b)=0$ when $a \neq b$. Let $f_{x_i}(x_i | x_j)=p_{X_i \given X_j}(a,b)$ for $x_i=a$ and $x_j=b$. One can verify that this is totally valid by our definition that $\sum_{x\in Vals(X_v)}f_v(x_v|_{pa(v)})=1$ because a children is either same or different from its parent.\\\\
+Now we must have:
+\begin{align*}
+f(0,0,0) &= f_{x_1}(x_1 | x_3)f_{x_2}(x_2|x_1)f_{x_3}(x_3|x_2)\\
+&=1\times1\times1\\
+&=1
+\end{align*}
+and
+\begin{align*}
+f(1,1,1) &= f_{x_1}(x_1 | x_3)f_{x_2}(x_2|x_1)f_{x_3}(x_3|x_2)\\
+&=1\times1\times1\\
+&=1
+\end{align*}
+This shows that $\sum_{x_1,x_2,x_3}f(x1, x2, x3)>1$
+
+\section{D-separation}
+\subsection*{(a)}
+Using Bayes Ball algorithm without shading any random variables, d-separation infers marginal independence. \\
+Then we can get $X_i \perp X_j$ for all $(i, j)$ in $(1,2), (1,3), (1,5), (1,7), (1,8),\\ (1,9),(1,10),(2,7), (2,8), (3,7),(3,8),(4,8),(6,7),(6,8),(7,8),(7,10),(8,10).$
+
+\subsection*{(b)}
+According to Bayes Ball algorithm, $X_3, X_5, X_7, X_8, X_10$ are d-separated. Therefore $A={3,5,7,8,10}$.
+
+\section{X,Y,Z}
+By writing out all $p(x, y, z)$ one can shows that $Pr(x,y,z)$ correspond to $p_X(x) = p_Y(y)=p_Z(z)=\frac{1}{2}$ and $p_{X,Y}(x,y)=p_{X,Z}(x,z)=p_{Y_Z}(y,z) = \frac{1}{4}$.\\\\
+This implies $p_{X,Y}=p_Xp_Y$, $p_{X,Z}=p_Xp_Z$ and $p_{Y,Z}=p_Yp_Z$.  Therefore $X$, $Y$ and $Z$ are mutual independent.\\\\
+Suppose there exists a directed acyclic graph $G$ such that $I_{d-sep}(G)=I(Pr)$. By $X \perp Y$, G must not contain edge between $X$ and $Y$ since $X,Y,Z$ must be a V-structure. However by $X \perp Z$, $X$ and $G$ must have a shared children in $G$. This contradicts with the fact that there missing edge between $X$ and $Y$ which is inferred by $X \perp Y$.
+\end{document}
