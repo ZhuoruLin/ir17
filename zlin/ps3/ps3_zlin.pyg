@@ -1,0 +1,44 @@
+# Update belief given a edge visiting schedule
+def schedule_propagation(schedule, graph):
+    '''
+    schedule: list of edges (in tuple form)parralel_update
+    '''
+    for node_origin, node_destination in schedule:
+        # Get fglib edge object
+        edge = graph.get_edge_data(node_origin, node_destination)['object']
+        # get message using sum-product algorithm
+        #print('%s --> %s'%(node_origin, node_destination))
+        message = node_origin.spa(node_destination).normalize()
+        # set message
+        edge.set_message(node_origin,node_destination,message)
+    return
+
+def get_beliefs(fg, n_iteration=10, parallel_update=True, saving_iterations=[]):
+    # If acyclic use depth first search to generate a efficient schedule
+    if not parallel_update:
+        root_node = list(fg.get_vnodes())[0]
+        root2leaf = list(nx.depth_first_search.dfs_edges(fg, root_node))
+        leaf2root = [(v,u) for u,v in reversed(root2leaf)]
+        schedule_propagation(leaf2root, fg)
+        schedule_propagation(root2leaf, fg)
+
+    # Otherwise, use iterative updating (Loopy propagation)
+    else:
+        fnodes = fg.get_fnodes()
+        vnodes = fg.get_vnodes()
+        nodes_sequence = fnodes + vnodes
+        schedule = [(node, neighbor) for node in nodes_sequence for neighbor in node.neighbors()]
+        bar = progressbar.ProgressBar()
+        #print('Iterating')
+        output_dict = OrderedDict([(str(vnode), []) for vnode in fg.get_vnodes()])
+        for i in bar(range(n_iteration)):
+            if i in saving_iterations:
+                for vnode in vnodes:
+                    output_dict[str(vnode)].append(vnode.belief().pmf)
+            # Propagate
+            schedule_propagation(schedule, fg)
+
+    # Final configuration saving
+    for vnode in vnodes:
+                    output_dict[str(vnode)].append(vnode.belief().pmf)
+    return output_dict
