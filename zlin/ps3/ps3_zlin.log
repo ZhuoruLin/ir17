@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  16 OCT 2017 18:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  16 OCT 2017 20:24
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -472,28 +472,122 @@ Underfull \hbox (badness 10000) in paragraph at lines 226--233
 
  []
 
-! Misplaced \noalign.
-\toprule ->\noalign 
-                    {\ifnum 0=`}\fi \@aboverulesep =\abovetopsep \global \@b...
-l.236 \toprule
-              
-I expect to see \noalign only after the \cr of
-an alignment. Proceed, and I'll ignore this case.
+[5] <brown_hw1.pdf, id=36, 364.36125pt x 163.61125pt>
+File: brown_hw1.pdf Graphic file (type pdf)
+ <use brown_hw1.pdf>
+Package pdftex.def Info: brown_hw1.pdf used on input line 248.
+(pdftex.def)             Requested size: 144.54pt x 64.9016pt.
 
-! Missing } inserted.
-<inserted text> 
-                }
-l.237 {
-       } &         0 &         1 \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
 
-! Missing } inserted.
-<inserted text> 
-                }
-l.237 {
-       } &         0 &         1 \\
-I've inserted something that you may have forgot
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 250.
+
+
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 250.
+
+
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 255.
+
+<brown_hw2.png, id=37, 540.0175pt x 194.7275pt>
+File: brown_hw2.png Graphic file (type png)
+ <use brown_hw2.png>
+Package pdftex.def Info: brown_hw2.png used on input line 267.
+(pdftex.def)             Requested size: 144.54pt x 52.11954pt.
+
+
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 270.
+
+
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 270.
+
+[6 <./brown_hw1.pdf> <./brown_hw2.png>]
+
+LaTeX Warning: Citation `choi_cvpr10' on page 7 undefined on input line 290.
+
+<object_recognition_in_context.pdf, id=51, 2172.115pt x 618.31pt>
+File: object_recognition_in_context.pdf Graphic file (type pdf)
+
+<use object_recognition_in_context.pdf>
+Package pdftex.def Info: object_recognition_in_context.pdf used on input line 2
+93.
+(pdftex.def)             Requested size: 419.16621pt x 119.31987pt.
+
+Overfull \hbox (1.89622pt too wide) in paragraph at lines 293--296
+ [][] 
+ []
+
+
+LaTeX Warning: Citation `choi_cvpr10' on page 7 undefined on input line 296.
+
+
+LaTeX Warning: Citation `choi_cvpr10' on page 7 undefined on input line 300.
+
+
+LaTeX Warning: Citation `Chow68approximatingdiscrete' on page 7 undefined on in
+put line 305.
+
+[7] <object_recognition_in_context2.pdf, id=56, 503.00403pt x 116.995pt>
+File: object_recognition_in_context2.pdf Graphic file (type pdf)
+
+<use object_recognition_in_context2.pdf>
+Package pdftex.def Info: object_recognition_in_context2.pdf used on input line 
+328.
+(pdftex.def)             Requested size: 419.16621pt x 97.49498pt.
+
+Overfull \hbox (1.89622pt too wide) in paragraph at lines 328--330
+ [][] 
+ []
+
+
+LaTeX Warning: Citation `choi_cvpr10' on page 8 undefined on input line 330.
+
+
+LaTeX Warning: Citation `choi_cvpr10' on page 8 undefined on input line 330.
+
+[8 <./object_recognition_in_context.pdf> <./object_recognition_in_context2.pdf>
+]
+runsystem(rm "ps3_zlin.pyg")...executed.
+
+ [9] (./ps3_zlin.aux)
+
+LaTeX Warning: There were undefined references.
+
+ )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 1061 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 6083 strings out of 493014
+ 97684 string characters out of 6133351
+ 209040 words of memory out of 5000000
+ 9502 multiletter control sequences out of 15000+600000
+ 9377 words of font info for 36 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 37i,16n,24p,1021b,4239s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc
+}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/urw/courier/ucrro8a.pfb>
+Output written on ps3_zlin.pdf (9 pages, 2329238 bytes).
+PDF statistics:
+ 209 PDF objects out of 1000 (max. 8388607)
+ 153 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+
