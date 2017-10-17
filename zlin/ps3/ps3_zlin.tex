@@ -273,19 +273,208 @@ message bits from the output of some communications channel. \cite{Brown}}
 
 \begin{enumerate}
 \item Implement code that, given an arbitrary parity check matrix H, constructs a corresponding factor graph. The parity check factors should evaluate to 1 if an even number of adjacent bits are active (equal 1), and 0 otherwise. Your factor graph representation should interface with your implementation of the sum-product algorithm from the previous problem. Define a small test case, and verify that your graphical model assigns zero probability to invalid codewords.
+\\
+\noindent\rule{14cm}{2pt}
+\\
+\\
+\textbf{Solutions:}
+\\
+First I defined the factor function as below:
+\begin{minted}[fontfamily=courier, linenos]{python}
+def construct_check_factor(check_fnode):
+    nodes_in_check = list(check_fnode.neighbors())
+    n_nodes_in_check = len(nodes_in_check)
+    pmf_shape = [2]*n_nodes_in_check
+    pmf_out = np.zeros(pmf_shape)
+    all_idx = np.where(pmf_out==0)
+    pmf_values = 1-np.stack(all_idx).sum(0)%2
+    pmf_out[all_idx] = pmf_values
+    return rv.Discrete(pmf_out, *nodes_in_check)
+\end{minted}
+This function takes a fglib fnode as input and will return a fglib.rv random variable object. To show a couple of test cases, let's look at the pmf\_out at line 8, which is the pmf of the check factor and check that it evaluates to 1 when the input x are valid codeword (Modulo sum to 0). 
+
+\begin{minted}[fontfamily=courier, linenos]{python}
+# Suppose we have a fnode that check 3 binary nodes the pmf is generated 
+# By following code for this factor
+n_nodes_in_check = 3
+pmf_shape = [2]*n_nodes_in_check
+pmf_out = np.zeros(pmf_shape)
+all_idx = np.where(pmf_out==0)
+pmf_values = 1-np.stack(all_idx).sum(0)%2
+pmf_out[all_idx] = pmf_values
+
+# Can observe that the factor will only evaluate to 1 
+# when there are even number of 1 among x1,x2 and x3
+for x1 in [0,1]:
+    for x2 in [0,1]:
+        for x3 in [0,1]:
+            print('x1=%d, x2=%d, x3=%d, f(x1,x2,x3)=%d'%(x1,x2,x3,
+            pmf_out[x1][x2][x3]))
+\end{minted}
+The results shows:\\
+\\
+x1=0, x2=0, x3=0, f(x1,x2,x3)=1\\
+x1=0, x2=0, x3=1, f(x1,x2,x3)=0\\
+x1=0, x2=1, x3=0, f(x1,x2,x3)=0\\
+x1=0, x2=1, x3=1, f(x1,x2,x3)=1\\
+x1=1, x2=0, x3=0, f(x1,x2,x3)=0\\
+x1=1, x2=0, x3=1, f(x1,x2,x3)=1\\
+x1=1, x2=1, x3=0, f(x1,x2,x3)=1\\
+x1=1, x2=1, x3=1, f(x1,x2,x3)=0\\
+\\
+This shows that the factor potential assigns zero probability to invalid codewords.\\\\
+\textbf{Graph Construction}
+The following codes are used to constructed graph based on a parity code check matrix $H$ and received noisy codeword.\\\\
+\begin{minted}[fontfamily=courier, linenos]{python}
+# Construct factor graph
+def construct_graph_with_H_and_observations(H, observations, error_rate=0.05):
+    n_checks, n_bits = H.shape
+    # Construct empty factor graph
+    factor_graph = graphs.FactorGraph()
+    # Construct bits V nodes
+    bits_vnodes = [nodes.VNode('x%d'%n) for n in range(n_bits)]
+    # Construct checks F nodes
+    checks_fnodes = [nodes.FNode('h%d'%m) for m in range(n_checks)]
+    # Construct priors F nodes
+    priors_fnodes = [nodes.FNode('f%d'%m) for m in range(n_bits)]
+    
+    # Register Nodes to the graph
+    factor_graph.set_nodes(priors_fnodes)
+    factor_graph.set_nodes(bits_vnodes)
+    factor_graph.set_nodes(checks_fnodes)
+    
+    # Construct Edges between priors and bits
+    factor_graph.set_edges(zip(priors_fnodes, bits_vnodes))
+    # Constrct Edges between bits and checks
+    check_idx, bit_idx = np.where(H==1)
+    for m, n in zip(check_idx, bit_idx):
+        factor_graph.set_edge(checks_fnodes[m], bits_vnodes[n])
+    
+    # Initialize check factors
+    for check_fnode in checks_fnodes:
+        check_fnode.factor = construct_check_factor(check_fnode)
+        # Initialize message rmn to 1 so that we can call belief() before iteration
+        for bit_vnode in check_fnode.neighbors():
+            edge = factor_graph.get_edge_data(check_fnode, bit_vnode)['object']
+            message = rv.Discrete([1,1], bit_vnode)
+            edge.set_message(check_fnode, bit_vnode, message)
+    # Initialize prior factors
+    for prior_fnode, observed_r in zip(priors_fnodes, observations):
+        prior_fnode.factor = construct_prior_factor(prior_fnode,observed_r,error_rate)
+        
+    # Initialize message hm->xn and fn->xn
+    for prior_fnode,bit_vnode in zip(priors_fnodes, bits_vnodes):
+        # initialize prior message so that we can call belief() before iteration
+        prior_message = prior_fnode.spa(bit_vnode).normalize()
+        factor_graph.get_edge_data(prior_fnode, bit_vnode)['object'].set_message(prior_fnode, bit_vnode, message)
+        # Initialize qmn
+        checks_for_this_node = bit_vnode.neighbors(prior_fnode)
+        message = prior_fnode.factor.pmf
+        message = rv.Discrete(message, bit_vnode)
+        for check in checks_for_this_node:
+            edge = factor_graph.get_edge_data(bit_vnode, check)['object']
+            edge.set_message(bit_vnode, check, message)  
+    return factor_graph
+\end{minted}
+\pagebreak
 \item Load the $N = 128$-bit LDPC code using the Python library \path{pyldpc} (for a tutorial see \url {github.com/hichamjanati/pyldpc-tutos}).  To evaluate decoding
 performance, we assume that the all-zeros codeword is sent, which always satisfies any set of parity checks. Using the random module, simulate the output of a binary symmetric
 channel: each transmitted bit is flipped to its complement with error probability $\epsilon =0.05$, and equal to the transmitted bit otherwise. Define unary factors for each variable node
 which equal $1-\epsilon$ if that bit equals the "received" bit at the channel output, and $\epsilon$ otherwise. Run the sum-product algorithm for 50 iterations of a parallel message update schedule, initializing by setting all variable-to-factor messages to be constant. After the final iteration, plot the estimated posterior probability that each codeword bit equals one.
 If we decode by setting each bit to the maximum of its corresponding marginal, would we find the right codeword?
+\\
+\noindent\rule{14cm}{2pt}
+\\
+\\
+\textbf{Solutions:}
+\\
+The iteration results is shown in Figure \ref{fig:p3-ptb}. It clearly shows that posterior in each bit equals 1 is very small. In this case, we would find the right codeword. However this performance is never guaranteed, as discussed in part c). The performance of belief propagation algorithm is not stable.
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{p3-ptb.png}
+\centering
+\label{fig:p3-ptb}
+\caption{Posterior beliefs on each bits after 50 iterations. Note that this does not guarantee to happen every time and is depend on the received codeword quality. Problem 3-c provide a better assessment of the model performance.}
+\end{figure}
+
+
+\pagebreak
 \item Repeat the experiment from part (b) for 10 random channel noise realizations with error probability $\epsilon= 0.06$. For each trial, run sum-product for 50 iterations. After each iteration, estimate the codeword by taking the maximum of each bit's marginal distribution, and evaluate the Hamming distance (number of differing bits) between the estimated and true (all-zeros) codeword. On a single plot, display 10 curves showing Hamming distance versus iteration for each Monte Carlo trial. Is BP a reliable decoding algorithm?
+\\
+\noindent\rule{14cm}{2pt}
+\\
+\\
+\textbf{Solutions:}
+\\
+The result is shown in Figure \ref{fig:p3-ptc-1}. We can see that the convergence of belief propagation is not very stable and therefore BP is not a very reliable decoding algorithm.
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{p3-ptc-1.png}
+\centering
+\caption{Hamming distances vs iteration for 10 different Monte Carlo trail.}
+\label{fig:p3-ptc-1}
+\end{figure}.
+
+\pagebreak
 \item Repeat part (c) with two higher error probabilities, $\epsilon = 0.08$ and $\epsilon = 0.10$. Discuss any qualitative differences in the behavior of the loopy BP decoder.
+\\
+\noindent\rule{14cm}{2pt}
+\\
+\\
+\textbf{Solutions:}
+\\
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{p3-ptd-1.png}
+\centering
+\caption{Hamming distances vs iteration for 10 different Monte Carlo trail at error rate 0.08.}
+\label{fig:p3-ptd-1}
+\end{figure}.
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{p3-ptd-2.png}
+\centering
+\caption{Hamming distances vs iteration for 10 different Monte Carlo trail at error rate 0.10.}
+\label{fig:p3-ptd-2}
+\end{figure}.
+The results are shown in Figure ~\ref{fig:p3-ptd-1} and ~\ref{fig:p3-ptd-2}. We can observed that when the error rate is higher, the hamming distances fluctuate more and takes longer to converge.
+
+\pagebreak
 \item For the LDPC codes we consider, we also define a corresponding $2N\times N$ generator matrix G. To encode an N-bit message vector we would like to transmit, we take the modulo-2 matrix product of the generator matrix with the message. The generator matrix has been constructed (via linear algebra over the  finite field GF(2)) such that this product always produces a valid 2N-bit codeword. Geometrically, its columns are chosen to span the null space of H. We use a systematic encoding, in which the first N codeword bits are simply copies of the message bits. The problems below use precomputed (G;H) pairs using the relevant functions in  \path{pyldpc}. Generate the $N = 1600$-bit LDPC code. Using this, we will replicate the visual decoding demonstration from MacKay's Fig. 47.5. Start by converting a $40\times 40$ binary image to a 1600-bit message vector; you may use the \path{logo} image we provide, or create your own. Encode the message using the  generator matrix $G$,
 and add noise with error probability $\epsilon = 0.06$. For this input, plot images showing the output of the sum-product decoder after 0, 1, 2, 3, 5, 10, 20, and 30 iterations. The \%
 operator may be useful for computing modulo-2 sums. You can use the numpy reshape function to easily convert between images and rasterized message vectors.
+\\
+\noindent\rule{14cm}{2pt}
+\\
+\\
+\textbf{Solutions:}
+\\
+The results is shown in Figure \ref{fig:p3-pte}
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{p3-pte.png}
+\centering
+\caption{Image decoding at error rate 0.06}
+\label{fig:p3-pte}
+\end{figure}.
+
+
+\pagebreak
 \item Repeat the previous part with a higher error probability of $\epsilon =0.10$, and discuss differences.
+\\
+\noindent\rule{14cm}{2pt}
+\\
+\\
+\textbf{Solutions:}
+\\
+The results is shown in Figure \ref{fig:p3-ptf}. With a higher error rate, the model have only limited ability to decode and cannot restore the original image.
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{p3-ptf.png}
+\centering
+\caption{Repeat part e with error rate 0.10.}
+\label{fig:p3-ptf}
+\end{figure}
+\pagebreak
+
+
 \end{enumerate}
 
+\pagebreak
 
 \item {\bf Chow-Liu algorithm.} When trying to do object detection from computer images, {\em context} can be very helpful. For example, if "car" and "road" are present in an image, then it is likely that "building" and "sky'" are present as well (see Figure~\ref{fig:object_rec}). In recent work, a tree-structured Markov random field (see Figure~\ref{fig:object_rec2}) was shown to be particularly useful for modeling the prior distribution of what objects are present in images and using this to improve object detection \cite{choi_cvpr10}.
 \begin{figure}[t]
