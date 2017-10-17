@@ -74,7 +74,9 @@ zlin@nyu.edu
 
 %{\bf Selected solutions}\\
 \ruleskip 
-{\em Due to the lack of .bib file in original GitHub repository, some of the citation will show up as ? in the following session. For the citation please refer to the original pdf version of problem set. I always fight hard to ensure a smooth Grading experience for you. }
+{\em Disclaimer: Due to the lack of .bib file in original GitHub repository, some of the citation will show up as ? in the following session. For the citation please refer to the original pdf version of problem set. I strive to ensure a smooth Grading experience for all of our graders. Codes that are less related to the problem are removed for the conciseness of this solutions. For graders, the codes for problem 2, 3 and 4 can be found in attachment in form of .ipynb. For anyone else who may concern, the original codes can be found in my GitHub repository. \\\\
+I adhered to NYU honor code in this assignment. I worked with Qianyu Cheng, Yiqiu Shen and Yuwei Tu on problem 2 and 3 and Qianyu Cheng on problem 4. All codes below and attached are developed independently. 
+}
 
 %\vspace{0.2in}
 
@@ -462,7 +464,7 @@ The results is shown in Figure \ref{fig:p3-pte}
 \\
 \textbf{Solutions:}
 \\
-The results is shown in Figure \ref{fig:p3-ptf}. With a higher error rate, the model have only limited ability to decode and cannot restore the original image.
+The results is shown in Figure \ref{fig:p3-ptf}. With a higher error rate, the model have only limited ability to decode and cannot fully restore the original image within 30 iterations.
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{p3-ptf.png}
 \centering
@@ -565,8 +567,113 @@ likelihood tree-structured MRF from the data provided. Your code should output t
 \begin{center}
 \url{http://www.hlt.utdallas.edu/~vgogate/uai14-competition/modelformat.html}
 \end{center}
+\noindent\rule{14cm}{2pt}
+\\
+\\
+\textbf{Solutions:}
+\\
+The following codes are used to compute the empirical marginal probability of $p(x_i)$ and the empirical co-occurrence probability  $p(x_i, x_j)$ and mutual information.
+\begin{minted}[fontfamily=courier, linenos]{python}
+def calculate_empirical_coocurence_probability(occurence):
+    n_records, n_classes = occurence.shape
+    matrix_11 = np.zeros((n_classes, n_classes))
+    matrix_00 = np.zeros((n_classes, n_classes))
+    matrix_10 = np.zeros((n_classes, n_classes))
+    matrix_01 = np.zeros((n_classes, n_classes))
+    bar = ProgressBar()
+    for row in bar(occurence):
+        idx_1 = np.where(row==1)[0]
+        idx_0 = np.where(row==0)[0]
+        idx_11 = combinations(idx_1, 2)
+        idx_00 = combinations(idx_0, 2)
+        idx_10 = product(idx_1, idx_0)
+        idx_01 = product(idx_0, idx_1)
+        for idx in idx_11:
+            matrix_11[idx]+=1
+        for idx in idx_00:
+            matrix_00[idx]+=1
+        for idx in idx_10:
+            matrix_10[idx]+=1
+        for idx in idx_01:
+            matrix_01[idx]+=1
+            
+    return matrix_11/n_records, matrix_00/n_records, matrix_10/n_records, 
+    	matrix_01/n_records
 
+def calculate_empirical_marginal_probability(occurence):
+    return occurence.mean(0), 1-occurence.mean(0)
 
+def calculate_mutial_information(occurence):
+    n_records, n_classes = occurence.shape
+    mutial_information_matrix = np.zeros((n_classes, n_classes))
+    prob_11, prob_00, prob_10, prob_01 = calculate_empirical_coocurence_probability(occurence)
+    prob_1, prob_0 = calculate_empirical_marginal_probability(occurence)
+    all_idx = combinations(np.arange(n_classes), 2)
+    for i,j in all_idx:
+        mutial_information_matrix[i,j]+=prob_11[i,j]*np.log(prob_11[i,j]/(prob_1[i]*prob_1[j]))
+        mutial_information_matrix[i,j]+=prob_00[i,j]*np.log(prob_00[i,j]/(prob_0[i]*prob_0[j]))
+        mutial_information_matrix[i,j]+=prob_10[i,j]*np.log(prob_10[i,j]/(prob_1[i]*prob_0[j]))
+        mutial_information_matrix[i,j]+=prob_01[i,j]*np.log(prob_01[i,j]/(prob_0[i]*prob_1[j]))
+    return np.nan_to_num(mutial_information_matrix)
+\end{minted}
+
+\textbf{Then The following codes are used for getting the max spanning tree edges and calculate the node(unary) and edges(pairwise) potential:}
+\begin{minted}[fontfamily=courier, linenos]{python}
+def get_tree_edges_from_mutual_information(mutial_information_matrix):
+    neg_mut_info_csr = csr_matrix(-mutial_information_matrix)
+    mstree_adj = minimum_spanning_tree(neg_mut_info_csr).todense()
+    return [edge for edge in zip(*np.where(mstree_adj<0))]
+
+def calculate_edge_potential(edges, occurence,name=None):
+    prob_11, prob_00, prob_10, prob_01 = calculate_empirical_coocurence_probability(occurence)
+    prob_1, prob_0 = calculate_empirical_marginal_probability(occurence)
+    pot_dict = {}
+    for edge in edges:
+        if name is None:
+            key = edge
+        else:
+            key = '--'.join(name[np.array(edge)])
+        i,j = edge
+        pot_11 =prob_11[i,j]/(prob_1[i]*prob_1[j])
+        pot_00 =prob_00[i,j]/(prob_0[i]*prob_0[j])
+        pot_10 =prob_10[i,j]/(prob_1[i]*prob_0[j])
+        pot_01 =prob_01[i,j]/(prob_0[i]*prob_1[j])
+        pot_dict[key] = np.array([[pot_00, pot_01], [pot_10, pot_11]])
+    return pot_dict
+
+def calculate_node_potentials(occurence):
+    prob_1, prob_0 = calculate_empirical_marginal_probability(occurence)
+    return np.stack([prob_0, prob_1]).T
+\end{minted}
+
+\textbf{Finnally, I used the following function to output the potentials into standard UAI format:}
+
+\begin{minted}[fontfamily=courier, linenos]{python}
+def get_uai_str(edges, node_potentials, edge_potentials):
+    num_vars = node_potentials.shape[0]
+    network_type = 'MARKOV'
+    num_vars_str = str(num_vars)
+    var_cardinals = ' '.join(['2']*num_vars)
+    num_cliques = str(len(edges))
+    edge_cliques = [' '.join(['2', str(i), str(j)]) for i, j in edges]
+    preamble = ([network_type, num_vars_str, var_cardinals, num_cliques]+ edge_cliques)
+    function_tables = []
+    # node potentials
+    for i in range(num_vars):
+        prob_str = ' '.join([' ', str(node_potentials[i][0]), str(node_potentials[i][1])])
+        function_tables += ['', '2', prob_str]
+    # edge potentials
+    for i, j in edges:
+        prob00 = edge_potentials[(i,j)][0][0]
+        prob01 = edge_potentials[(i,j)][0][1]
+        prob_str1 = ' '.join([' ', str(prob00), str(prob01)])
+        prob10 = edge_potentials[(i,j)][1][0]
+        prob11 = edge_potentials[(i,j)][1][1]
+        prob_str2 = ' '.join([' ', str(prob10), str(prob11)])
+        function_tables += ['', '4', prob_str1, prob_str2]
+    return '\n'.join(preamble + function_tables + [''])
+\end{minted}
+\textbf{The final results is stored in a file named 'p4.uai' and is enclosed in the submission.}
 
 \end{enumerate}
 

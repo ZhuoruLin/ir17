@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  16 OCT 2017 21:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  17 OCT 2017 02:57
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -405,41 +405,45 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 (./_minted-ps3_zlin/default-pyg-prefix.pygstyle)
+Underfull \hbox (badness 10000) in paragraph at lines 77--80
+
+ []
+
 
 LaTeX Warning: Citation `blitzstein2014introduction' on page 1 undefined on inp
-ut line 82.
+ut line 84.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 84.
+LaTeX Font Info:    Try loading font information for U+msa on input line 86.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 84.
+LaTeX Font Info:    Try loading font information for U+msb on input line 86.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (6.06862pt too wide) in paragraph at lines 97--104
+Overfull \hbox (6.06862pt too wide) in paragraph at lines 99--106
 [] 
  []
 
 [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-Overfull \hbox (25.00003pt too wide) in paragraph at lines 132--144
+Overfull \hbox (25.00003pt too wide) in paragraph at lines 134--146
 $[]$ 
  []
 
 [2]
 
-LaTeX Warning: Citation `Brown' on page 3 undefined on input line 148.
+LaTeX Warning: Citation `Brown' on page 3 undefined on input line 150.
 
 
-Overfull \hbox (28.06862pt too wide) in paragraph at lines 159--170
+Overfull \hbox (28.06862pt too wide) in paragraph at lines 161--172
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--170
+Underfull \hbox (badness 10000) in paragraph at lines 161--172
 
  []
 
@@ -458,58 +462,58 @@ LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 3.
 
 [3]) [4]
-Overfull \hbox (28.06862pt too wide) in paragraph at lines 226--233
+Overfull \hbox (28.06862pt too wide) in paragraph at lines 228--235
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--233
+Underfull \hbox (badness 10000) in paragraph at lines 228--235
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--233
+Underfull \hbox (badness 10000) in paragraph at lines 228--235
 
  []
 
 [5] <brown_hw1.pdf, id=36, 364.36125pt x 163.61125pt>
 File: brown_hw1.pdf Graphic file (type pdf)
  <use brown_hw1.pdf>
-Package pdftex.def Info: brown_hw1.pdf used on input line 248.
+Package pdftex.def Info: brown_hw1.pdf used on input line 250.
 (pdftex.def)             Requested size: 144.54pt x 64.9016pt.
 
 
-LaTeX Warning: Citation `Brown' on page 6 undefined on input line 250.
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 252.
 
 
-LaTeX Warning: Citation `Brown' on page 6 undefined on input line 250.
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 252.
 
 
-LaTeX Warning: Citation `Brown' on page 6 undefined on input line 255.
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 257.
 
 <brown_hw2.png, id=37, 540.0175pt x 194.7275pt>
 File: brown_hw2.png Graphic file (type png)
  <use brown_hw2.png>
-Package pdftex.def Info: brown_hw2.png used on input line 267.
+Package pdftex.def Info: brown_hw2.png used on input line 269.
 (pdftex.def)             Requested size: 144.54pt x 52.11954pt.
 
 
-LaTeX Warning: Citation `Brown' on page 6 undefined on input line 270.
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 272.
 
 
-LaTeX Warning: Citation `Brown' on page 6 undefined on input line 270.
+LaTeX Warning: Citation `Brown' on page 6 undefined on input line 272.
 
 \openout3 = `ps3_zlin.pyg'.
 
 
 (./_minted-ps3_zlin/53BDBD5656C6170D06078AEE2E877C850758A3B8FA3C3C429D51E52876F
 B2014.pygtex
-Overfull \hbox (28.06862pt too wide) in paragraph at lines 275--1
+Overfull \hbox (28.06862pt too wide) in paragraph at lines 277--1
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 275--1
+Underfull \hbox (badness 10000) in paragraph at lines 277--1
 
  []
 
@@ -524,42 +528,42 @@ B2014.pygtex)
 
 (./_minted-ps3_zlin/D73B31E3F3FB8EADA341885661E1D0650758A3B8FA3C3C429D51E52876F
 B2014.pygtex
-Underfull \hbox (badness 10000) in paragraph at lines 314--1
+Underfull \hbox (badness 10000) in paragraph at lines 316--1
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 314--1
+Underfull \hbox (badness 10000) in paragraph at lines 316--1
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 314--1
+Underfull \hbox (badness 10000) in paragraph at lines 316--1
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 314--1
+Underfull \hbox (badness 10000) in paragraph at lines 316--1
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 314--1
+Underfull \hbox (badness 10000) in paragraph at lines 316--1
 
  []
 
 [7]) [8] <p3-ptb.png, id=58, 367.3725pt x 264.99pt>
 File: p3-ptb.png Graphic file (type png)
  <use p3-ptb.png>
-Package pdftex.def Info: p3-ptb.png used on input line 393.
+Package pdftex.def Info: p3-ptb.png used on input line 395.
 (pdftex.def)             Requested size: 208.635pt x 150.49191pt.
 
-Overfull \hbox (28.06862pt too wide) in paragraph at lines 380--398
+Overfull \hbox (28.06862pt too wide) in paragraph at lines 382--400
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 380--398
+Underfull \hbox (badness 10000) in paragraph at lines 382--400
 
  []
 
@@ -567,15 +571,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 380--398
 File: p3-ptc-1.png Graphic file (type png)
 
 <use p3-ptc-1.png>
-Package pdftex.def Info: p3-ptc-1.png used on input line 410.
+Package pdftex.def Info: p3-ptc-1.png used on input line 412.
 (pdftex.def)             Requested size: 208.635pt x 141.95627pt.
 
-Overfull \hbox (28.06862pt too wide) in paragraph at lines 401--415
+Overfull \hbox (28.06862pt too wide) in paragraph at lines 403--417
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 401--415
+Underfull \hbox (badness 10000) in paragraph at lines 403--417
 
  []
 
@@ -583,21 +587,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 401--415
 File: p3-ptd-1.png Graphic file (type png)
 
 <use p3-ptd-1.png>
-Package pdftex.def Info: p3-ptd-1.png used on input line 425.
+Package pdftex.def Info: p3-ptd-1.png used on input line 427.
 (pdftex.def)             Requested size: 208.635pt x 144.56427pt.
  <p3-ptd-2.png, id=70, 382.42876pt x 264.99pt>
 File: p3-ptd-2.png Graphic file (type png)
 
 <use p3-ptd-2.png>
-Package pdftex.def Info: p3-ptd-2.png used on input line 431.
+Package pdftex.def Info: p3-ptd-2.png used on input line 433.
 (pdftex.def)             Requested size: 208.635pt x 144.56427pt.
 
-Overfull \hbox (28.06862pt too wide) in paragraph at lines 417--437
+Overfull \hbox (28.06862pt too wide) in paragraph at lines 419--439
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--437
+Underfull \hbox (badness 10000) in paragraph at lines 419--439
 
  []
 
@@ -605,15 +609,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 417--437
 <p3-pte.png, id=76, 538.01pt x 543.02875pt>
 File: p3-pte.png Graphic file (type png)
  <use p3-pte.png>
-Package pdftex.def Info: p3-pte.png used on input line 450.
+Package pdftex.def Info: p3-pte.png used on input line 452.
 (pdftex.def)             Requested size: 208.635pt x 210.57889pt.
 
-Overfull \hbox (28.06862pt too wide) in paragraph at lines 439--455
+Overfull \hbox (28.06862pt too wide) in paragraph at lines 441--457
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 439--455
+Underfull \hbox (badness 10000) in paragraph at lines 441--457
 
  []
 
@@ -621,66 +625,91 @@ Underfull \hbox (badness 10000) in paragraph at lines 439--455
 File: p3-ptf.png Graphic file (type png)
 
 <use p3-ptf.png>
-Package pdftex.def Info: p3-ptf.png used on input line 467.
+Package pdftex.def Info: p3-ptf.png used on input line 469.
 (pdftex.def)             Requested size: 208.635pt x 210.57889pt.
 
-Overfull \hbox (28.06862pt too wide) in paragraph at lines 458--473
+Overfull \hbox (28.06862pt too wide) in paragraph at lines 460--475
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 458--473
+Underfull \hbox (badness 10000) in paragraph at lines 460--475
 
  []
 
 [13 <./p3-ptf.png>]
 
-LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 479.
+LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 481.
 
 <object_recognition_in_context.pdf, id=87, 2172.115pt x 618.31pt>
 File: object_recognition_in_context.pdf Graphic file (type pdf)
 
 <use object_recognition_in_context.pdf>
 Package pdftex.def Info: object_recognition_in_context.pdf used on input line 4
-82.
+84.
 (pdftex.def)             Requested size: 419.16621pt x 119.31987pt.
 
-Overfull \hbox (1.89622pt too wide) in paragraph at lines 482--485
+Overfull \hbox (1.89622pt too wide) in paragraph at lines 484--487
  [][] 
  []
 
 
-LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 485.
+LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 487.
 
 
-LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 489.
+LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 491.
 
 
 LaTeX Warning: Citation `Chow68approximatingdiscrete' on page 14 undefined on i
-nput line 494.
+nput line 496.
 
 <object_recognition_in_context2.pdf, id=88, 503.00403pt x 116.995pt>
 File: object_recognition_in_context2.pdf Graphic file (type pdf)
 
 <use object_recognition_in_context2.pdf>
 Package pdftex.def Info: object_recognition_in_context2.pdf used on input line 
-517.
+519.
 (pdftex.def)             Requested size: 419.16621pt x 97.49498pt.
 
-Overfull \hbox (1.89622pt too wide) in paragraph at lines 517--519
+Overfull \hbox (1.89622pt too wide) in paragraph at lines 519--521
  [][] 
  []
 
 
-LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 519.
+LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 521.
 
 
-LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 519.
+LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 521.
 
 [14 <./object_recognition_in_context.pdf>]
+\openout3 = `ps3_zlin.pyg'.
+
+
+(./_minted-ps3_zlin/C2EB43B20E9DB02F95669A93709A64060758A3B8FA3C3C429D51E52876F
+B2014.pygtex
+Overfull \hbox (6.06862pt too wide) in paragraph at lines 570--1
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 570--1
+
+ []
+
+[15 <./object_recognition_in_context2.pdf>])
+\openout3 = `ps3_zlin.pyg'.
+
+
+(./_minted-ps3_zlin/5E2F24BFB56FFCFB8D6B98C4CB7D2DA30758A3B8FA3C3C429D51E52876F
+B2014.pygtex [16])
+\openout3 = `ps3_zlin.pyg'.
+
+
+(./_minted-ps3_zlin/D963CDDF0288DD888290E3550C7AB4CA0758A3B8FA3C3C429D51E52876F
+B2014.pygtex [17])
 runsystem(rm "ps3_zlin.pyg")...executed.
 
- [15 <./object_recognition_in_context2.pdf>] (./ps3_zlin.aux)
+ [18] (./ps3_zlin.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -690,10 +719,10 @@ LaTeX Warning: There were undefined references.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 6131 strings out of 493014
- 99187 string characters out of 6133351
- 210316 words of memory out of 5000000
- 9535 multiletter control sequences out of 15000+600000
+ 6143 strings out of 493014
+ 100168 string characters out of 6133351
+ 210535 words of memory out of 5000000
+ 9538 multiletter control sequences out of 15000+600000
  9377 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,16n,24p,1021b,4239s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -717,10 +746,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/t
 exmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2016/texmf-dis
 t/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/
 type1/urw/courier/ucrro8a.pfb>
-Output written on ps3_zlin.pdf (15 pages, 2430580 bytes).
+Output written on ps3_zlin.pdf (18 pages, 2440125 bytes).
 PDF statistics:
- 241 PDF objects out of 1000 (max. 8388607)
- 167 compressed objects within 2 object streams
+ 250 PDF objects out of 1000 (max. 8388607)
+ 173 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
