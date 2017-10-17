@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  17 OCT 2017 02:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  17 OCT 2017 13:40
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -685,7 +685,7 @@ LaTeX Warning: Citation `choi_cvpr10' on page 14 undefined on input line 521.
 \openout3 = `ps3_zlin.pyg'.
 
 
-(./_minted-ps3_zlin/C2EB43B20E9DB02F95669A93709A64060758A3B8FA3C3C429D51E52876F
+(./_minted-ps3_zlin/BD2E7B595E6940ECDA92C7F9EF58A76D0758A3B8FA3C3C429D51E52876F
 B2014.pygtex
 Overfull \hbox (6.06862pt too wide) in paragraph at lines 570--1
 [] 
@@ -696,20 +696,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 570--1
 
  []
 
-[15 <./object_recognition_in_context2.pdf>])
+[15 <./object_recognition_in_context2.pdf>] [16])
 \openout3 = `ps3_zlin.pyg'.
 
 
-(./_minted-ps3_zlin/5E2F24BFB56FFCFB8D6B98C4CB7D2DA30758A3B8FA3C3C429D51E52876F
-B2014.pygtex [16])
+(./_minted-ps3_zlin/CE59CD6208F70A83E13BF26870AE1E480758A3B8FA3C3C429D51E52876F
+B2014.pygtex)
 \openout3 = `ps3_zlin.pyg'.
 
 
-(./_minted-ps3_zlin/D963CDDF0288DD888290E3550C7AB4CA0758A3B8FA3C3C429D51E52876F
-B2014.pygtex [17])
+(./_minted-ps3_zlin/127FE17444E6D843B2E6B96FF4175A170758A3B8FA3C3C429D51E52876F
+B2014.pygtex [17]) <p4.png, id=189, 1284.8pt x 963.6pt>
+File: p4.png Graphic file (type png)
+ <use p4.png>
+Package pdftex.def Info: p4.png used on input line 682.
+(pdftex.def)             Requested size: 419.16621pt x 314.37196pt.
+
+Overfull \hbox (1.89622pt too wide) in paragraph at lines 682--684
+ [][] 
+ []
+
 runsystem(rm "ps3_zlin.pyg")...executed.
 
- [18] (./ps3_zlin.aux)
+[18 <./p4.png>] (./ps3_zlin.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -719,10 +728,10 @@ LaTeX Warning: There were undefined references.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 6143 strings out of 493014
- 100168 string characters out of 6133351
- 210535 words of memory out of 5000000
- 9538 multiletter control sequences out of 15000+600000
+ 6148 strings out of 493014
+ 100217 string characters out of 6133351
+ 210534 words of memory out of 5000000
+ 9542 multiletter control sequences out of 15000+600000
  9377 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,16n,24p,1021b,4239s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -746,10 +755,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/t
 exmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2016/texmf-dis
 t/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/
 type1/urw/courier/ucrro8a.pfb>
-Output written on ps3_zlin.pdf (18 pages, 2440125 bytes).
+Output written on ps3_zlin.pdf (18 pages, 2562785 bytes).
 PDF statistics:
- 250 PDF objects out of 1000 (max. 8388607)
+ 252 PDF objects out of 1000 (max. 8388607)
  173 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

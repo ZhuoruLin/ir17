@@ -173,7 +173,7 @@ The belief propagation code is attached below. I used the .spa method defined in
 \item \textbf{schedule\_propagation}\\
 This function takes two inputs: the edge visiting schedule and the fglib factor graph. The function simply update the message of each edge using sum-product algorithm.
 \item \textbf{get\_belief}\\
-This function will iterate through the graph and return the beliefs history for each nodes. This breaks down to two cases. If the input factor graph is acyclic, this function will create a efficient schedule for message update by depth first search in the graph. The marginal beliefs  converge after each edge is visited twice. When the input factor graph contains cycle, the function generate a iterative update schedule that updates the factor-to-variable messages first then variable-to-factor messages.
+This function will iterate through the graph and return the beliefs history for each nodes. This breaks down to two cases. If the input factor graph is acyclic, this function will create a efficient schedule for message update by depth first search in the graph. The marginal beliefs  converge after each edge is visited twice. When the input factor graph contains cycle, the function generate a iterative update schedule that firstly updates the factor-to-variable then variable-to-factor messages. 
 
 \end{enumerate}
 \begin{minted}[fontfamily=courier, linenos]{python}
@@ -326,7 +326,7 @@ x1=1, x2=1, x3=1, f(x1,x2,x3)=0\\
 \\
 This shows that the factor potential assigns zero probability to invalid codewords.\\\\
 \textbf{Graph Construction}
-The following codes are used to constructed graph based on a parity code check matrix $H$ and received noisy codeword.\\\\
+The following codes are used to constructed graph based on a parity code check matrix $H$ and received noisy codeword. It also initializes all the variable-to-factor messages.\\\\
 \begin{minted}[fontfamily=courier, linenos]{python}
 # Construct factor graph
 def construct_graph_with_H_and_observations(H, observations, error_rate=0.05):
@@ -390,12 +390,12 @@ If we decode by setting each bit to the maximum of its corresponding marginal, w
 \\
 \textbf{Solutions:}
 \\
-The iteration results is shown in Figure \ref{fig:p3-ptb}. It clearly shows that posterior in each bit equals 1 is very small. In this case, we would find the right codeword. However this performance is never guaranteed, as discussed in part c). The performance of belief propagation algorithm is not stable.
+The iteration results is shown in Figure \ref{fig:p3-ptb}. It clearly shows that posterior in each bit equals 1 is very small. In this case, we would find the right codeword. However this performance is never guaranteed, as discussed in part c). The performance of belief propagation algorithm is not stable. It is totally possible that occasionally the decoded codeword contains a couple wrong bits.
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{p3-ptb.png}
 \centering
-\label{fig:p3-ptb}
 \caption{Posterior beliefs on each bits after 50 iterations. Note that this does not guarantee to happen every time and is depend on the received codeword quality. Problem 3-c provide a better assessment of the model performance.}
+\label{fig:p3-ptb}
 \end{figure}
 
 
@@ -574,7 +574,11 @@ likelihood tree-structured MRF from the data provided. Your code should output t
 \\
 The following codes are used to compute the empirical marginal probability of $p(x_i)$ and the empirical co-occurrence probability  $p(x_i, x_j)$ and mutual information.
 \begin{minted}[fontfamily=courier, linenos]{python}
-def calculate_empirical_coocurence_probability(occurence):
+# Probably dump way to do the calculation and data structure
+# but works for the time being
+
+# Coocurrence probability
+def calculate_empirical_coocurrence_probability(occurence):
     n_records, n_classes = occurence.shape
     matrix_11 = np.zeros((n_classes, n_classes))
     matrix_00 = np.zeros((n_classes, n_classes))
@@ -596,37 +600,39 @@ def calculate_empirical_coocurence_probability(occurence):
             matrix_10[idx]+=1
         for idx in idx_01:
             matrix_01[idx]+=1
-            
-    return matrix_11/n_records, matrix_00/n_records, matrix_10/n_records, 
-    	matrix_01/n_records
+    prob_11 = (matrix_11/n_records).reshape(n_classes,n_classes,1)
+    prob_00 = (matrix_00/n_records).reshape(n_classes,n_classes,1)
+    prob_10 = (matrix_10/n_records).reshape(n_classes,n_classes,1)
+    prob_01 = (matrix_01/n_records).reshape(n_classes,n_classes,1)
+    
+    return np.concatenate([prob_00, prob_01, prob_10, prob_11]
+                          ,2).reshape(n_classes, n_classes, 2, 2)
 
 def calculate_empirical_marginal_probability(occurence):
-    return occurence.mean(0), 1-occurence.mean(0)
+    return np.concatenate([1-occurence.mean(0).reshape(-1,1), 
+                           occurence.mean(0).reshape(-1,1)], 
+                          1)
 
-def calculate_mutial_information(occurence):
-    n_records, n_classes = occurence.shape
-    mutial_information_matrix = np.zeros((n_classes, n_classes))
-    prob_11, prob_00, prob_10, prob_01 = calculate_empirical_coocurence_probability(occurence)
-    prob_1, prob_0 = calculate_empirical_marginal_probability(occurence)
+# Calculate mutual information
+def calculate_mutial_information(prob_ij, prob_i):
+    n_classes = prob_i.shape[0]
+    mutual_information_matrix = np.zeros((n_classes, n_classes))
     all_idx = combinations(np.arange(n_classes), 2)
     for i,j in all_idx:
-        mutial_information_matrix[i,j]+=prob_11[i,j]*np.log(prob_11[i,j]/(prob_1[i]*prob_1[j]))
-        mutial_information_matrix[i,j]+=prob_00[i,j]*np.log(prob_00[i,j]/(prob_0[i]*prob_0[j]))
-        mutial_information_matrix[i,j]+=prob_10[i,j]*np.log(prob_10[i,j]/(prob_1[i]*prob_0[j]))
-        mutial_information_matrix[i,j]+=prob_01[i,j]*np.log(prob_01[i,j]/(prob_0[i]*prob_1[j]))
-    return np.nan_to_num(mutial_information_matrix)
+        for si, sj in [[0,0],[0,1], [1,0], [1,1]]:
+            mutual_information_matrix[i,j]+=prob_ij[i, j][si, sj]*np.log(prob_ij[i,j][si, sj]/(prob_i[i][si]*prob_i[j][sj]))
+    # Impute missing values to zeros
+    return np.nan_to_num(mutual_information_matrix)
 \end{minted}
 
 \textbf{Then The following codes are used for getting the max spanning tree edges and calculate the node(unary) and edges(pairwise) potential:}
 \begin{minted}[fontfamily=courier, linenos]{python}
-def get_tree_edges_from_mutual_information(mutial_information_matrix):
-    neg_mut_info_csr = csr_matrix(-mutial_information_matrix)
+def get_tree_edges_from_mutual_information(mutual_information_matrix):
+    neg_mut_info_csr = csr_matrix(-mutual_information_matrix)
     mstree_adj = minimum_spanning_tree(neg_mut_info_csr).todense()
     return [edge for edge in zip(*np.where(mstree_adj<0))]
 
-def calculate_edge_potential(edges, occurence,name=None):
-    prob_11, prob_00, prob_10, prob_01 = calculate_empirical_coocurence_probability(occurence)
-    prob_1, prob_0 = calculate_empirical_marginal_probability(occurence)
+def calculate_edge_potential(prob_ij, prob_i,name=None):
     pot_dict = {}
     for edge in edges:
         if name is None:
@@ -634,23 +640,19 @@ def calculate_edge_potential(edges, occurence,name=None):
         else:
             key = '--'.join(name[np.array(edge)])
         i,j = edge
-        pot_11 =prob_11[i,j]/(prob_1[i]*prob_1[j])
-        pot_00 =prob_00[i,j]/(prob_0[i]*prob_0[j])
-        pot_10 =prob_10[i,j]/(prob_1[i]*prob_0[j])
-        pot_01 =prob_01[i,j]/(prob_0[i]*prob_1[j])
-        pot_dict[key] = np.array([[pot_00, pot_01], [pot_10, pot_11]])
+        pot_ij = prob_ij[i,j]/(np.outer(prob_i[i],prob_i[j]))
+        pot_dict[key] = pot_ij
     return pot_dict
-
-def calculate_node_potentials(occurence):
-    prob_1, prob_0 = calculate_empirical_marginal_probability(occurence)
-    return np.stack([prob_0, prob_1]).T
+# Just to get aligned
+def calculate_node_potentials(prob_i):
+    return prob_i
 \end{minted}
 
 \textbf{Finnally, I used the following function to output the potentials into standard UAI format:}
 
 \begin{minted}[fontfamily=courier, linenos]{python}
-def get_uai_str(edges, node_potentials, edge_potentials):
-    num_vars = node_potentials.shape[0]
+def get_uai_str(edges, nodes_potentials, edges_potentials):
+    num_vars = nodes_potentials.shape[0]
     network_type = 'MARKOV'
     num_vars_str = str(num_vars)
     var_cardinals = ' '.join(['2']*num_vars)
@@ -660,20 +662,28 @@ def get_uai_str(edges, node_potentials, edge_potentials):
     function_tables = []
     # node potentials
     for i in range(num_vars):
-        prob_str = ' '.join([' ', str(node_potentials[i][0]), str(node_potentials[i][1])])
+        prob_str = ' '.join([' ', str(nodes_potentials[i][0]), str(nodes_potentials[i][1])])
         function_tables += ['', '2', prob_str]
     # edge potentials
     for i, j in edges:
-        prob00 = edge_potentials[(i,j)][0][0]
-        prob01 = edge_potentials[(i,j)][0][1]
+        prob00 = edges_potentials[(i,j)][0][0]
+        prob01 = edges_potentials[(i,j)][0][1]
         prob_str1 = ' '.join([' ', str(prob00), str(prob01)])
-        prob10 = edge_potentials[(i,j)][1][0]
-        prob11 = edge_potentials[(i,j)][1][1]
+        prob10 = edges_potentials[(i,j)][1][0]
+        prob11 = edges_potentials[(i,j)][1][1]
         prob_str2 = ' '.join([' ', str(prob10), str(prob11)])
         function_tables += ['', '4', prob_str1, prob_str2]
     return '\n'.join(preamble + function_tables + [''])
 \end{minted}
 \textbf{The final results is stored in a file named 'p4.uai' and is enclosed in the submission.}
+Just to shows that what written above works, here is a visualization of the potential factor graph. And it clearly shows that the connection between nodes shows co-occurrence relations.
+\begin{figure}[ht]
+\centering
+\includegraphics[width=5.8in]{p4.png}
+\vspace{-8mm}
+\caption{Potential graph visualization. The closer in the graph the higher two nodes have higher probability to occurs together in a picture. You can clearly see some combinations that makes sense. Such as sky-mountain, sea-boat, shoes-bag, and window-door.}
+\end{figure}
+
 
 \end{enumerate}
 
