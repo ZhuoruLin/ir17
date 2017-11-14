@@ -16,11 +16,13 @@ We will study latent graphical models (Latent Dirichlet Allocation, Gaussian Pro
 
 ### Lecture Location
 Monday, 6:20-8:00pm, in 60 FA 110
-### [Recitation/Laboratory](https://github.com/inf16nyu/home/tree/master/labs) (required for all students)
-Wednesdays, 5:20-6:10pm in 60 FA 110
+### [Recitation/Laboratory] (required for all students)
+Mondays, 8:10-9:00pm in 60 FA 110
 
 ### Office hours
-JB: Monday, 10:00-11:00pm. Location: 60 5th ave, 6th floor, room 612.
+JB: Monday, 9:00-11:00am. Location: 60 5th ave, 6th floor, room 612.
+
+VK: Wednesday, 9:30-10:30am. Location: 60 5th ave, 7th floor, room 737.
 
 ### Grading
 problem sets (45%) + midterm exam (25%) + final project (25%) + participation (5%). 
@@ -29,7 +31,7 @@ problem sets (45%) + midterm exam (25%) + final project (25%) + participation (5
 We will use [Piazza](https://piazza.com/class/j7ccyig9hwz1ze) to answer questions and post announcements about the course.  Students' use of Piazza, particularly for adequately answering other students' questions, will contribute toward their participation grade.
 
 ### Online recordings 
-Most of the lectures and labs' videos will be posted to NYU Classes. Note, however, that class attendance is required.
+Most of the lectures videos will be posted to NYU Classes. Note, however, that class attendance is required.
 
 ## Schedule
 | Week        | Lecture Date           | Topic       |  Reference                    |  Deliverables  |
@@ -41,13 +43,13 @@ Most of the lectures and labs' videos will be posted to NYU Classes. Note, howev
 | 7 |  10/16 | **Lec5** PCA. ICA. Applications to Survey Data [Slides](https://github.com/joanbruna/ir17/blob/master/slides/lecture5.pdf) | [Elements of Statistical Learning, Ch.14](http://statweb.stanford.edu/~tibs/ElemStatLearn/)<br /><br /> [Finding Structure in Randomness (...), Halko, Martinsson, Tropp](https://arxiv.org/pdf/0909.4061v2.pdf) |  [PS4](https://github.com/joanbruna/ir17/blob/master/hw/ps4.pdf), due 10/25 |
 | 8 | 10/23 | **Lec6** Clustering. EM. Markov Chain Monte-Carlo (MCMC). [slides](https://github.com/joanbruna/ir17/blob/master/slides/lecture6.pdf) | [MIT Lecture 18 Notes](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-438-algorithms-for-inference-fall-2014/lecture-notes/MIT6_438F14_Lec18.pdf) <br /><br /> Elements of Stat. Learning 14.5 and 8.5 <br /><br /> [Hamilton Monte-Carlo (optional)](http://www.mcmchandbook.net/HandbookChapter5.pdf)|   | 
 | 9 | 10/30 | **Midterm Exam** | |  |
-| 10 | 11/6 | **Lec7** Variational Inference. Revisiting EM. Mean Field.  [slides](https://github.com/inf17nyu/home/blob/master/slides/lecture6.pdf) | [Graphical Models, Exponential Families and Variational INference, Chapter 3](https://people.eecs.berkeley.edu/~wainwrig/Papers/WaiJor08_FTML.pdf) [Variational INference with Stochastic Search](http://www.cs.berkeley.edu/%7Ejordan/papers/paisley-etal-icml12.pdf) |  |
-| 12 | 11/13 | **Lec8**  Structured Output Prediction. Conditional Random Fields (CRF), Hidden Markov Models, Moment Matching | | [PS5](https://github.com/inf17nyu/home/blob/master/hw/ps5/ps5.pdf), due 11/21 | 
-| 13 | 11/20 | **Lec9** Sequential Models [slides](https://github.com/inf17nyu/home/blob/master/slides/lecture8.pdf) <br /><br />**No lab this week** | Murphy, Secs. 19.5 & 19.6 <br /> [Notes on pseudo-likelihood](http://cs.nyu.edu/~dsontag/courses/inference15/slides/pseudolikelihood_notes.pdf) <br /> [An Introduction to Conditional Random Fields](http://arxiv.org/pdf/1011.4088v1) (section 4; optional) <br /> [Approximate maximum entropy learning in MRFs](http://arxiv.org/abs/1206.3257) (optional) | |
-| 14 | 11/27 |  **Lec10**  Boltzmann Machines. Variational Autoencoders [slides](https://github.com/inf17nyu/home/blob/master/slides/lecture9.pdf) |  | [PS6](https://github.com/inf17nyu/home/blob/master/hw/ps7/), due 12/5 |
+| 10 | 11/6 | **Lec7** Variational Inference. Revisiting EM. Mean Field.  [slides](https://github.com/joanbruna/ir17/blob/master/slides/lecture7.pdf) | [Graphical Models, Exponential Families and Variational INference, Chapter 3](https://people.eecs.berkeley.edu/~wainwrig/Papers/WaiJor08_FTML.pdf) [Variational INference with Stochastic Search](http://www.cs.berkeley.edu/%7Ejordan/papers/paisley-etal-icml12.pdf) |  |
+| 11 | 11/13 | **Lec8**  Variational Inference (cont'd). Variational Autoencoders [slides](https://github.com/joanbruna/ir17/blob/master/slides/lecture8.pdf) | [Variational Inference: A review for Statisticians, by Blei, McAuliffe, Kucukelbir](https://arxiv.org/pdf/1601.00670.pdf) [AutoEncoding Variational Bayes (Kingma, Welling](https://arxiv.org/abs/1312.6114) | [PS5](https://github.com/joanbruna/ir17/blob/master/hw/ps5/ps5.pdf), due 11/22 | 
+| 12 | 11/20 | **Lec9**  Structured Output Prediction. Conditional Random Fields (CRF), Hidden Markov Models, Moment Matching | Murphy, Secs. 19.5 & 19.6 <br /> [Notes on pseudo-likelihood](http://cs.nyu.edu/~dsontag/courses/inference15/slides/pseudolikelihood_notes.pdf) <br /> [An Introduction to Conditional Random Fields](http://arxiv.org/pdf/1011.4088v1) (section 4; optional) <br /> [Approximate maximum entropy learning in MRFs](http://arxiv.org/abs/1206.3257) (optional) | |
+| 14 | 11/27 |  **Lec10**  Boltzmann Machines. Deep Generative Models  |  | [PS6](https://github.com/inf17nyu/home/blob/master/hw/ps7/), due 12/5 |
 | 15 | 12/4 | **Guest Lecture TBA**  |  |  |
-| 16 | 12/11 | **Lec10** Modeling Images and high-dimensional data. Deep Auto-regressive Models. Normalizing Flows. Generative Adversarial Networks | references in slides |  |
-|  | 12/12  | **Lec11**  Further applications of GANS. Open Problems | references in slides | [Project writeup](https://github.com/inf16nyu/home/blob/master/hw/project_writeup.pdf), due 12/16. |
+| 16 | 12/11 | **Lec11** Modeling Images and high-dimensional data. Deep Auto-regressive Models. Normalizing Flows. Generative Adversarial Networks | references in slides |  |
+|  | 12/12  | **Lec12**  Further applications of GANS. Open Problems | references in slides | [Project writeup](https://github.com/inf16nyu/home/blob/master/hw/project_writeup.pdf), due 12/16. |
 | 17 | 12/18 | **Final Day**  Poster Presentations of Final Projects <br /><br /> <b>Location: Center for Data Science, 60 5th ave, in the 7th floor open space</b> | | |
 
 ### Bibliography
