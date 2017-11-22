@@ -144,10 +144,82 @@ From equation \ref{eqn_px}, we know that $p(\textbf{p})$ is a Gaussian distribut
 
 \item 
 The update of $\textbf{x}$ and $\textbf{p}$ is based on \textit{Hamiltonian equation}, which is depended only on the hamiltonian $\mathcal{H (\textbf{x},\textbf{p})}$ but not the partition function $Z$. Therefore the leapfrog algorithm does not require the knowledge of the partition function.
+\pagebreak
 
 \item 
+As shown in Radford's introduction of Hamiltonian MCMC \cite{neal2011mcmc}, the HMC step leaves canonical distribution invariante.
+Also we know from previous problems that the canonical distribution is seperable. Therefore at any state of $\textbf{x}$ and $\textbf{p}$ during HMC steps the marginal distribution $p(\textbf{x}) =\int p(\textbf{x}, \textbf{p}) d\textbf{p} = p(\textbf{x})\int p(\textbf{p})d\textbf{p} = p(\textbf{x})$.
+\pagebreak
 
+\item 
+Before HMC, we first need to define the function to calculate potential energy $U(\textbf{x})$ and the gradient at x position $\triangledown_{\textbf{x}} U(\textbf{x})$. These correspond to \textbf{U} and \textbf{grad\_U} in codes:
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import multivariate_normal
+from numpy.linalg import inv
+from numpy.random import normal
+from functools import partial
+# Implement HMC for Q9 of HW5.
+# Global variable
+MEAN = np.array([0.0, 0.0])
+COV_MAT = np.array([[1, 0.998], [0.998, 1]])
+
+def U(x):
+    x = np.array(x)
+    p_x = multivariate_normal.pdf(x, mean=MEAN, cov=COV_MAT)
+    return -np.log(p_x)
+
+def grad_U(x):
+    """
+    Return partial derivative dU/dx given x
+    """
+    x = np.array(x)
+    return inv(COV_MAT).dot(x)
+\end{minted}
+Noticed that I used the fact that $\triangledown_{\textbf{x}} U(\textbf{x}) = \Sigma^{-1} x$ with $U(x) = -\log p(\textbf{x})$ and $p(\textbf{x})$ follows multivariate normaldistribution with zero mean and $\Sigma$ covariance.
+
+Then the implementation of HMC step is:
+
+\begin{minted}{python}
+def HMC2(findE, gradE, epsilon, L, x):
+    g = gradE ( x )  # set gradient using initial x
+    E = findE ( x )
+    p = normal(0, 1, len(x))
+    H = p.dot(p) / 2 + E ; # evaluate H(x,p)
+    xnew = x 
+    gnew = g 
+    for l in range(L): # make Tau `leapfrog' steps
+        p = p - epsilon * gnew / 2 ; # make half-step in p
+        xnew = xnew + epsilon * p ; # make step in x
+        gnew = gradE ( xnew ) ; # find new gradient
+        p = p - epsilon * gnew / 2 ; # make half-step in p
+    Enew = findE ( xnew ) ; # find new value of H
+    Hnew = p.dot(p) / 2 + Enew ;
+    dH = Hnew - H ; # Decide whether to accept
+    if ( dH < 0 ):
+        accept = 1 
+    elif ( np.random.uniform(0,1) < np.exp(-dH) ):
+        accept = 1
+    else:
+        accept = 0 ;
+    if accept:
+        g = gnew 
+        x = xnew 
+        E = Enew 
+    return x
+\end{minted}
+
+The result trajecgory is shown in Figure \ref{fig_p5}:
+
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{./plots/p5.png}
+\caption{The trajectory of Hamiltonian HMC sampled from bivariate normal distribution with correlation 0.998.}
+\label{fig_p5}
+\end{figure}
 
 \end{enumerate}
 
+\bibliographystyle{acm}
+\bibliography{reference}
 \end{document}
