@@ -1,0 +1,123 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{url}
+\usepackage[usenames]{color}
+\usepackage[]{algorithm2e}
+\usepackage{minted}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+
+\pagestyle{empty} \addtolength{\textwidth}{1.0in}
+\addtolength{\textheight}{0.5in} \addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\newcommand{\ruleskip}{\bigskip\hrule\bigskip}
+\newcommand{\nodify}[1]{{\sc #1}} \newcommand{\points}[1]{{\textbf{[#1
+points]}}}
+
+\newcommand{\bitem}{\begin{list}{$\bullet$}%
+{\setlength{\itemsep}{0pt}\setlength{\topsep}{0pt}%
+\setlength{\rightmargin}{0pt}}} \newcommand{\eitem}{\end{list}}
+
+%\input{../../defs}
+
+\newcommand{\G}{\mathcal{G}}
+
+%\newcommand{\bE}{\mbox{\boldmath $E$}}
+%\newcommand{\be}{\mbox{\boldmath $e$}}
+%\newcommand{\bU}{\mbox{\boldmath $U$}}
+%\newcommand{\bu}{\mbox{\boldmath $u$}}
+%\newcommand{\bQ}{\mbox{\boldmath $Q$}}
+%\newcommand{\bq}{\mbox{\boldmath $q$}}
+%\newcommand{\bX}{\mbox{\boldmath $X$}}
+%\newcommand{\bY}{\mbox{\boldmath $Y$}}
+%\newcommand{\bZ}{\mbox{\boldmath $Z$}}
+%\newcommand{\bx}{\mbox{\boldmath $x$}}
+%\newcommand{\by}{\mbox{\boldmath $y$}}
+%\newcommand{\bz}{\mbox{\boldmath $z$}}
+
+\newcommand{\true}{\mbox{true}}
+\newcommand{\Parents}{\mbox{Parents}}
+
+\newcommand{\ww}{{\bf w}}
+\newcommand{\xx}{{\bf x}}
+\newcommand{\yy}{{\bf y}}
+\newcommand{\real}{\ensuremath{\mathbb{R}}}
+
+
+\newcommand{\eat}[1]{}
+
+\newcommand{\CInd}[3]{({#1} \perp {#2} \mid {#3})}
+\newcommand{\Ind}[2]{({#1} \perp {#2})}
+
+\setlength{\parindent}{0pt} \setlength{\parskip}{0.5ex}
+\begin{document}
+\pagestyle{myheadings} \markboth{}{DS-GA-1005/CSCI-GA.2569 Problem Set
+  6  Zhuoru Lin's answer }
+
+{\LARGE
+\begin{center}Inference and Representation, Fall 2017\end{center}
+}
+
+{\Large
+Structured Prediction for Part-of-Speech Tagging,
+MLE and MaxEnt, Max-Sum BP
+}
+\begin{center}
+Zhuoru Lin\\
+zlin@nyu.edu
+\end{center}
+
+
+%{\bf Selected solutions}\\
+\ruleskip 
+{\em Disclaimer: 
+I adhered to NYU honor code in this assignment. }
+
+\begin{enumerate}
+\item \textbf{Part-of-speech tagging using SSVM}
+\pagebreak
+\item \textbf{Max-Product}
+\pagebreak
+\item \textbf{Exponential families}
+\\
+The log-likelihood of the data is:
+\begin{equation}
+\log [p(x, \theta)] = \sum_{n=1}^{L}( \langle \theta, f(x^{(n)}) \rangle - \log[Z(\theta)])
+\end{equation}
+The maximum likelihood estimation $\theta_{ML}$ must satisfied:
+\begin{align}
+\frac{\partial p}{ \partial \theta} (\theta_{ML}) &= 0 \\
+\sum_{n=1}^{L}f(x^{(n)}) - L\sum_{x} \frac{\exp[<\theta_{ML}, f(x^{n})>] }{Z(\theta_{ML})} f(x^n) &= 0\\
+\frac{1}{L} \sum_{n=1}^{L}f(x^{(n)})  &= \sum_{x} p(x | \theta_{ML}) f(x^{n})
+\end{align}
+Technically, we also need to show that this is in fact an maximum by showing the seconderivative. This is ignored here.
+\pagebreak
+\item \textbf{Maximun entropy distribution}
+The maximum entropy distribution can be formulated as an functinal optimization problem as:
+\begin{align*}
+\text{arg} \max_{p} \int_x \log(p(x)) p(x) dx \\ 
+\text{  with} \int_{x} p(x) dx=1\\
+ \text{ and } \int p(x) f_k(x) = \alpha_k \text{  for all k}
+\end{align*}
+The Lagrangian is:
+\begin{equation}
+\mathcal{L} = \int_x \log(p(x)) p(x) dx - \sum_{k} (\theta_k \int p(x) f_k(x)  - \alpha_k) - (\lambda \int p(x)dx -1).
+\end{equation}
+The Lagrange multiplier states that the optimum acheives zero derivatives of Lagragian. Taking the functional derivative, we have:
+\begin{equation}
+\log (p(x) ) + 1 - \lambda - \sum_{k} \theta_k f_k(x) = 0
+\end{equation}
+Therefore we must have:
+\begin{align}
+p(x) &= \exp (\sum_{k} \theta_k f_k(x) + \lambda - 1)\\
+&=\frac{1}{Z} \exp (\langle \theta, f(x) \rangle)
+\end{align}
+with $Z = \exp(1-\lambda)$
+\end{enumerate}
+
+%\bibliographystyle{acm}
+%\bibliography{reference}
+\end{document}
