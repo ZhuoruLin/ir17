@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 DEC 2017 02:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 DEC 2017 11:48
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -407,33 +407,42 @@ e
 (./_minted-ps6_zlin/default-pyg-prefix.pygstyle) [1{/usr/local/texlive/2016/tex
 mf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2]
-LaTeX Font Info:    Try loading font information for U+msa on input line 87.
+]
+\openout3 = `ps6_zlin.pyg'.
+
+
+(./_minted-ps6_zlin/74787EDF72566E6414E86BCF4E55F65B40144810BCD8C04DE9228AC7B96
+CF373.pygtex) [2]
+LaTeX Font Info:    Try loading font information for U+msa on input line 141.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 87.
+LaTeX Font Info:    Try loading font information for U+msb on input line 141.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [3] [4]
+) [3]
+runsystem(rm "ps6_zlin.pyg")...executed.
+
+ [4]
 (./ps6_zlin.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5985 strings out of 493014
- 95698 string characters out of 6133351
- 204919 words of memory out of 5000000
- 9425 multiletter control sequences out of 15000+600000
- 7111 words of font info for 28 fonts, out of 8000000 for 9000
+ 5999 strings out of 493014
+ 96215 string characters out of 6133351
+ 205992 words of memory out of 5000000
+ 9434 multiletter control sequences out of 15000+600000
+ 7279 words of font info for 29 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,10n,24p,819b,3969s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,10n,24p,819b,4099s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmitt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
@@ -441,11 +450,12 @@ mr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 .pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pf
 b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on ps6_zlin.pdf (4 pages, 125995 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on ps6_zlin.pdf (4 pages, 148505 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 69 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

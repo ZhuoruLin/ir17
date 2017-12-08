@@ -78,8 +78,63 @@ I adhered to NYU honor code in this assignment. }
 
 \begin{enumerate}
 \item \textbf{Part-of-speech tagging using SSVM}
+\begin{enumerate}
+\item 
+
+\item 
+\item 
+\item
+\end{enumerate}
 \pagebreak
-\item \textbf{Max-Product}
+\item \textbf{MaxSum}
+\\
+We can leverage the fglib library we used before. First we define the factor graph by the following codes. Notice how we can set the node potential by defining a prior factor that contains only one nodes. The edge potential is set by the factor that contains two nodes. The result of MaxSum algorithm returns is (0,1,1,1,1,1)
+
+\begin{minted}{python}
+fg = graphs.FactorGraph()
+
+###### Construct Graph
+x1 = nodes.VNode('X1', rv.Discrete)
+x2 = nodes.VNode('X2', rv.Discrete)
+x3 = nodes.VNode('X3', rv.Discrete)
+x4 = nodes.VNode('X4', rv.Discrete)
+x5 = nodes.VNode('X5', rv.Discrete)
+x6 = nodes.VNode('X6', rv.Discrete)
+# Priors 
+f1 = nodes.FNode('f1', rv.Discrete([2,1], x1))
+f2 = nodes.FNode('f1', rv.Discrete([2,1], x1))
+f3 = nodes.FNode('f1', rv.Discrete([2,1], x1))
+f4 = nodes.FNode('f1', rv.Discrete([2,1], x1))
+f5 = nodes.FNode('f1', rv.Discrete([2,1], x1))
+f6 = nodes.FNode('f1', rv.Discrete([2,1], x1))
+# Factors
+f12 = nodes.FNode('f12', rv.Discrete([[1,2],[3,4]], x1, x2))
+f13 = nodes.FNode('f13', rv.Discrete([[1,2],[3,4]], x1, x3))
+f14 = nodes.FNode('f14', rv.Discrete([[1,2],[3,4]], x1, x4))
+f25 = nodes.FNode('f25', rv.Discrete([[1,2],[3,4]], x2, x5))
+f26 = nodes.FNode('f26', rv.Discrete([[1,2],[3,4]], x2, x6))
+# Register nodes
+fg.set_nodes([x1,x2,x3,x4,x5,x6])
+fg.set_nodes([f1,f2,f3,f4,f5,f6,f12,f13,f14,f25,f26])
+# Edges
+fg.set_edge(f1, x1)
+fg.set_edge(f2, x2)
+fg.set_edge(f3, x3)
+fg.set_edge(f4, x4)
+fg.set_edge(f5, x5)
+fg.set_edge(f6, x6)
+fg.set_edge(x1, f12)
+fg.set_edge(f12, x2)
+fg.set_edge(x1, f13)
+fg.set_edge(f13, x3)
+fg.set_edge(x1, f14)
+fg.set_edge(f14, x4)
+fg.set_edge(x2, f25)
+fg.set_edge(f25, x5)
+fg.set_edge(x2, f26)
+fg.set_edge(f26, x6)
+\end{minted}
+
 \pagebreak
 \item \textbf{Exponential families}
 \\
